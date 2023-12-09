@@ -24,14 +24,12 @@ function getIconType(iconType: string) {
 
 const Board = ({board, navigation}: any) => {
   const IconType = getIconType(board.iconType);
-
   return (
     <TouchableOpacity
       key={board.id}
       style={styles.boardItem}
-      onPress={() => navigation.navigate('BingoGame', { boardId: board.id })}
+      onPress={() => navigation.navigate('PlayBoard', { navigation: navigation, board: board })}
     >
-        
         <IconType name={board.iconName} size={20} />
         <Text style={styles.boardText}>{board.name}</Text>
     </TouchableOpacity>
