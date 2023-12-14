@@ -8,6 +8,7 @@ import _ from 'lodash';
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
 const fontSize = Math.floor(squareWidth * 0.15)
+let iterator = 0;
 
 function getIconType(iconType: string) {
     if (iconType === 'MCI') {
@@ -23,21 +24,23 @@ const PlayBoard = ({navigation, route }) => {
   const IconType = getIconType(board.iconType);
 
   const handleSquareSelection = (square) => {
-    setBoard((prevState) => ({
-      ...prevState,
-      squares: prevState.squares.map((currentSquare) => {
-        if (currentSquare.id === square.id) {
-          return { ...currentSquare, isSelected: !currentSquare.isSelected };
+    let updatedBoard = _.cloneDeep(board)
+    updatedBoard.squares.forEach(column => {
+      column.forEach(currentSquare => {
+        if (currentSquare.landmarkId === square.landmarkId) {
+          currentSquare.isSelected = !currentSquare.isSelected;
         }
-      }),
-    }));
+      })
+    })
+
+    setBoard(updatedBoard)
   };
   
 
-  const renderSquare = ({item: square}) => (
+  const renderSquare = (square) => (
     <TouchableOpacity
     style={[styles.square, square.isSelected ? styles.selectedSquare : styles.square]}
-            onPress={handleSquareSelection}
+            onPress={() => handleSquareSelection(square)}
           >
             {square.isSelected && (
               <View  />
@@ -54,15 +57,47 @@ const PlayBoard = ({navigation, route }) => {
   return (
   <>
   <View style={styles.container}>
-  <Text style={styles.boardTitle}>{board.name}</Text><FlatList
+  <Text style={styles.boardTitle}>{board.name}</Text>
+  <FlatList
       data={board.squares}
-      keyExtractor={(square) => square.landmarkId.toString()}
-      renderItem={renderSquare}
-      numColumns={5} />
+      keyExtractor={(square) => board.squares.indexOf(square)}
+      renderItem={({item, index}) => {
+        return (
+          <View>
+            {item.map((square, columnIndex) => {
+              return renderSquare(square)
+            })}
+          </View>
+        )
+      }}
+      numColumns={5} 
+    />
     </View>
   </>
   );
 };
+
+
+
+// const BingoBoard = () => (
+//   <FlatList
+//     data={board}
+//     renderItem={({ item, index }) => {
+//       // Get the current row index
+//       const rowIndex = Math.floor(index / numColumns);
+
+//       return (
+//         <View style={styles.row}>
+//           {item.map((square, columnIndex) => {
+//             const squareIndex = rowIndex * numColumns + columnIndex;
+//             // Render each square with its index and content
+//             return <Square key={squareIndex} item={square} />;
+//           })}
+//         </View>
+//       );
+//     }}
+//   />
+// );
 
 export default PlayBoard;
 
