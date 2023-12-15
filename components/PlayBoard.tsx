@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -8,7 +8,7 @@ import _ from 'lodash';
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
 const fontSize = Math.floor(squareWidth * 0.15)
-let iterator = 0;
+let isBingo = false;
 
 function getIconType(iconType: string) {
     if (iconType === 'MCI') {
@@ -20,8 +20,36 @@ function getIconType(iconType: string) {
 
 const PlayBoard = ({navigation, route }) => {
   const [board, setBoard] = useState(route.params?.board)
-  // const [bingo, setBingo] = useState(false);
   const IconType = getIconType(board.iconType);
+
+  useEffect(() => {
+    for (const row of board.squares) {
+      if (row.every(square => square.isSelected)) {
+        console.log('row')
+        isBingo = true;
+      }
+    }
+  
+    // Check all columns
+    for (let col = 0; col < board.squares[0].length; col++) {
+      if (board.squares.every(row => row[col].isSelected)) {
+        isBingo = true;
+        console.log('column')
+      }
+    }
+  
+    // Check diagonals
+    if (board.squares.every((row, i) => row[i].isSelected)) {
+      isBingo = true;
+      console.log('diag 1')
+    }
+    if (board.squares.every((row, i) => row[board.squares.length - 1 - i].isSelected)) {
+      isBingo = true;
+      console.log('diag 2')
+    }
+
+    console.log('bingo is ', isBingo)
+  }, [board])
 
   const handleSquareSelection = (square) => {
     let updatedBoard = _.cloneDeep(board)
@@ -76,28 +104,6 @@ const PlayBoard = ({navigation, route }) => {
   </>
   );
 };
-
-
-
-// const BingoBoard = () => (
-//   <FlatList
-//     data={board}
-//     renderItem={({ item, index }) => {
-//       // Get the current row index
-//       const rowIndex = Math.floor(index / numColumns);
-
-//       return (
-//         <View style={styles.row}>
-//           {item.map((square, columnIndex) => {
-//             const squareIndex = rowIndex * numColumns + columnIndex;
-//             // Render each square with its index and content
-//             return <Square key={squareIndex} item={square} />;
-//           })}
-//         </View>
-//       );
-//     }}
-//   />
-// );
 
 export default PlayBoard;
 
