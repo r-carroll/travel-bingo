@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { Overlay, Icon } from '@rneui/themed';
+import LottieView from "lottie-react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Dimensions } from 'react-native';
@@ -7,8 +9,7 @@ import _ from 'lodash';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
-const fontSize = Math.floor(squareWidth * 0.15)
-let isBingo = false;
+const fontSize = Math.floor(squareWidth * 0.15);
 
 function getIconType(iconType: string) {
     if (iconType === 'MCI') {
@@ -19,36 +20,30 @@ function getIconType(iconType: string) {
   }
 
 const PlayBoard = ({navigation, route }) => {
-  const [board, setBoard] = useState(route.params?.board)
+  const [board, setBoard] = useState(route.params?.board);
+  const [isBingo, setIsBingo] = useState(false);
   const IconType = getIconType(board.iconType);
 
   useEffect(() => {
     for (const row of board.squares) {
       if (row.every(square => square.isSelected)) {
-        console.log('row')
-        isBingo = true;
+        setIsBingo(true);
       }
     }
   
-    // Check all columns
     for (let col = 0; col < board.squares[0].length; col++) {
       if (board.squares.every(row => row[col].isSelected)) {
-        isBingo = true;
-        console.log('column')
+        setIsBingo(true);
       }
     }
   
-    // Check diagonals
     if (board.squares.every((row, i) => row[i].isSelected)) {
-      isBingo = true;
-      console.log('diag 1')
+      setIsBingo(true);
     }
     if (board.squares.every((row, i) => row[board.squares.length - 1 - i].isSelected)) {
-      isBingo = true;
-      console.log('diag 2')
+      setIsBingo(true);
     }
 
-    console.log('bingo is ', isBingo)
   }, [board])
 
   const handleSquareSelection = (square) => {
@@ -63,7 +58,43 @@ const PlayBoard = ({navigation, route }) => {
 
     setBoard(updatedBoard)
   };
+
+  const toggleBingo = () => {
+    setIsBingo(!isBingo);
+  };
   
+
+
+  const BingoVictoryOverlay = () => {
+    if (!isBingo) return null;
+  
+    return (
+      <View>
+      <Overlay
+        isVisible={isBingo}
+        fullScreen={false}
+        
+      >
+          <Text style={[styles.modalText]}>BINGO!</Text>
+          <LottieView
+            source={require("../assets/confetti.json")}
+            autoPlay
+            loop
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 200 }}
+          />
+          <Button
+            title="Play Again!"
+            // onPress={onPlayAgain}
+          />
+          
+          <Button
+            title="Return to Board"
+            onPress={toggleBingo}
+          />
+      </Overlay>
+      </View>
+    );
+  };  
 
   const renderSquare = (square) => (
     <TouchableOpacity
@@ -84,6 +115,7 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
+  <BingoVictoryOverlay />
   <View style={styles.container}>
   <Text style={styles.boardTitle}>{board.name}</Text>
   <FlatList
@@ -117,6 +149,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primary,
+  },
+  modalText: {
+    margin: 20,
+    textAlign: 'center',
+    fontSize: 30, 
+    fontWeight: 'bold'
   },
   boardTitle: {
     fontSize: 24,
