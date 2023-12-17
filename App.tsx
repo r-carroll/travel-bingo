@@ -21,9 +21,7 @@ export default function App() {
         name="PlayBoard"
         component={PlayBoard}
         options={({ route }) => ({
-          title: 'test', // Access board name from params
         })}
-        //initialParams={{ board: {} }} // Pass selected board as param
       />
       </Stack.Navigator>
     </NavigationContainer>

@@ -5,7 +5,7 @@ export const boards = [
       "iconType": "MI",
       "iconName": "location-city",
       "squares": [
-        [{
+      {
           "label": "Iconic Building",
           "iconType": "MI",
           "iconName": "location-city",
@@ -34,8 +34,8 @@ export const boards = [
           "iconType": "MI",
           "iconName": "location-city",
           "landmarkId": 5
-        }],
-        [{
+        },
+        {
           "label": "Iconic Building",
           "iconType": "MI",
           "iconName": "location-city",
@@ -64,8 +64,8 @@ export const boards = [
           "iconType": "MI",
           "iconName": "location-city",
           "landmarkId": 10
-        }],
-        [{
+        },
+        {
           "label": "Iconic Building",
           "iconType": "MI",
           "iconName": "location-city",
@@ -94,8 +94,8 @@ export const boards = [
           "iconType": "MI",
           "iconName": "location-city",
           "landmarkId": 15
-        }],
-        [{
+        },
+        {
           "label": "Iconic Building",
           "iconType": "MI",
           "iconName": "location-city",
@@ -124,8 +124,8 @@ export const boards = [
           "iconType": "MI",
           "iconName": "location-city",
           "landmarkId": 20
-        }],
-        [{
+        },
+        {
           "label": "Iconic Building",
           "iconType": "MI",
           "iconName": "location-city",
@@ -154,7 +154,7 @@ export const boards = [
           "iconType": "MI",
           "iconName": "location-city",
           "landmarkId": 25
-        }]
+        }
       ]
     },
     {

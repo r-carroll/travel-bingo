@@ -4,6 +4,8 @@ import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { convertTo2DArray, shuffleArray } from '../shared/utils';
+
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
 
@@ -19,8 +21,21 @@ function getIconType(iconType: string) {
     }
   }
 
+
 const PlayBoard = ({navigation, route }) => {
-  const [board, setBoard] = useState(route.params?.board);
+  const originalBoard = route.params?.board;
+
+  const prepareBoard = (): any => {
+    let shuffledBoard = _.cloneDeep(originalBoard);
+    let shuffledSquares = shuffleArray(shuffledBoard.squares);
+    shuffledSquares = convertTo2DArray(shuffledSquares);
+
+    shuffledBoard.squares = shuffledSquares;
+
+    return shuffledBoard;
+  }
+
+  const [board, setBoard] = useState(prepareBoard);
   const [isBingo, setIsBingo] = useState(false);
   const IconType = getIconType(board.iconType);
 
@@ -63,7 +78,10 @@ const PlayBoard = ({navigation, route }) => {
     setIsBingo(!isBingo);
   };
   
-
+  const resetBoard = () => {
+    setIsBingo(false);
+    setBoard(prepareBoard);
+  }
 
   const BingoVictoryOverlay = () => {
     if (!isBingo) return null;
@@ -84,12 +102,19 @@ const PlayBoard = ({navigation, route }) => {
           />
           <Button
             title="Play Again!"
-            // onPress={onPlayAgain}
+            onPress={resetBoard}
           />
           
           <Button
             title="Return to Board"
             onPress={toggleBingo}
+          />
+
+          <Button
+            title="Back to board select"
+            onPress={() =>
+              navigation.navigate('SelectBoard')
+            }
           />
       </Overlay>
       </View>
