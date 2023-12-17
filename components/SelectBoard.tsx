@@ -28,9 +28,9 @@ const Board = ({board, navigation}: any) => {
     <TouchableOpacity
       key={board.id}
       style={styles.boardItem}
-      onPress={() => navigation.navigate('PlayBoard', { navigation: navigation, board: board })}
+      onPress={() => navigation.navigate('PlayBoard', { boardId: board.id })}
     >
-        <IconType name={board.iconName} size={20} />
+        <IconType name={board.iconName} size={20} style={{padding: 5}}/>
         <Text style={styles.boardText}>{board.name}</Text>
     </TouchableOpacity>
   );

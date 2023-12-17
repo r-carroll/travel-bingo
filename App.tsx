@@ -1,15 +1,20 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { LogBox } from 'react-native';
 import SelectBoard from './components/SelectBoard';
 import '@expo/metro-runtime';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 const Stack = createNativeStackNavigator();
 const PlayBoard = React.lazy(() => import('./components/PlayBoard'));
 
 export default function App() {
   return (
+    <React.Suspense>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SelectBoard">
         <Stack.Screen
@@ -25,5 +30,6 @@ export default function App() {
       />
       </Stack.Navigator>
     </NavigationContainer>
+    </React.Suspense>
   );
 }

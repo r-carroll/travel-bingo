@@ -2,28 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'; 
 import { convertTo2DArray, shuffleArray } from '../shared/utils';
 
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
+import { boards } from '../data/boards';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
 const fontSize = Math.floor(squareWidth * 0.15);
 
 function getIconType(iconType: string) {
-    if (iconType === 'MCI') {
+    if (iconType == 'MCI') {
       return MaterialCommunityIcons;
-    } else {
+    } else if (iconType == 'FA5') {
+      return FontAwesome5;
+    }
+    else {
       return MaterialIcons;
     }
   }
 
 
 const PlayBoard = ({navigation, route }) => {
-  const originalBoard = route.params?.board;
+  const originalBoard = boards.find(board => board.id === route.params?.boardId);
 
   const prepareBoard = (): any => {
     let shuffledBoard = _.cloneDeep(originalBoard);
@@ -31,13 +34,15 @@ const PlayBoard = ({navigation, route }) => {
     shuffledSquares = convertTo2DArray(shuffledSquares);
 
     shuffledBoard.squares = shuffledSquares;
+    shuffledBoard.squares[2][2].label = 'Free'
+    shuffledBoard.squares[2][2].iconName = 'check-circle'
+    shuffledBoard.squares[2][2].iconType = 'FA5'
 
     return shuffledBoard;
   }
 
   const [board, setBoard] = useState(prepareBoard);
   const [isBingo, setIsBingo] = useState(false);
-  const IconType = getIconType(board.iconType);
 
   useEffect(() => {
     for (const row of board.squares) {
@@ -121,22 +126,27 @@ const PlayBoard = ({navigation, route }) => {
     );
   };  
 
-  const renderSquare = (square) => (
-    <TouchableOpacity
-    style={[styles.square, square.isSelected ? styles.selectedSquare : styles.square]}
-            onPress={() => handleSquareSelection(square)}
-          >
-            {square.isSelected && (
-              <View  />
-            )}
-            <IconType
-              name={square.iconName}
-              size={20}
-              color="#333"
-            />
-            <Text style={styles.squareText}>{square.label}</Text>
-          </TouchableOpacity>
-  );
+  const renderSquare = (square) => {
+    const IconType = getIconType(square.iconType)
+    return (
+      <TouchableOpacity
+      key={square.landmarkId}
+      style={[styles.square, square.isSelected ? styles.selectedSquare : styles.square]}
+              onPress={() => handleSquareSelection(square)}
+            >
+              {square.isSelected && (
+                <View  />
+              )}
+              <IconType
+                name={square.iconName}
+                size={20}
+                color="#333"
+                style={{padding: 5}}
+              />
+              <Text style={styles.squareText}>{square.label}</Text>
+            </TouchableOpacity>
+    );
+  }
 
   return (
   <>
@@ -145,7 +155,7 @@ const PlayBoard = ({navigation, route }) => {
   <Text style={styles.boardTitle}>{board.name}</Text>
   <FlatList
       data={board.squares}
-      keyExtractor={(square) => board.squares.indexOf(square)}
+      keyExtractor={(square) => square.landmarkId}
       renderItem={({item, index}) => {
         return (
           <View>
@@ -204,10 +214,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   squareText: {
-    fontSize,
     fontWeight: 'bold',
     textAlign: 'center',
     color: colors.text,
+    paddingBottom: 10
   },
 });
   

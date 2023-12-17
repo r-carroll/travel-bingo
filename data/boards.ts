@@ -12,148 +12,160 @@ export const boards = [
           "landmarkId": 1
         },
         {
-          "label": "Bustling Market",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Street Market",
+          "iconType": "MCI",
+          "iconName": "food-apple",
           "landmarkId": 2
         },
         {
           "label": "Street Performance",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "iconType": "FA5",
+          "iconName": "theater-masks",
           "landmarkId": 3
         },
         {
-          "label": "Museum Exhibit",
+          "label": "Museum",
           "iconType": "MI",
-          "iconName": "location-city",
+          "iconName": "museum",
           "landmarkId": 4
         },
         {
-          "label": "Public Park",
+          "label": "Park",
           "iconType": "MI",
-          "iconName": "location-city",
+          "iconName": "park",
           "landmarkId": 5
         },
         {
-          "label": "Iconic Building",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Historical Marker",
+          "iconType": "MCI",
+          "iconName": "sign-text",
           "landmarkId": 6
         },
         {
-          "label": "Bustling Market",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Bridge",
+          "iconType": "MCI",
+          "iconName": "bridge",
           "landmarkId": 7
         },
         {
-          "label": "Street Performance",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Stadium",
+          "iconType": "MCI",
+          "iconName": "stadium-variant",
           "landmarkId": 8
         },
         {
-          "label": "Museum Exhibit",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "University",
+          "iconType": "FA5",
+          "iconName": "university",
           "landmarkId": 9
         },
         {
-          "label": "Public Park",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Transit Bus",
+          "iconType": "FA5",
+          "iconName": "bus",
           "landmarkId": 10
         },
         {
-          "label": "Iconic Building",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Bike",
+          "iconType": "MCI",
+          "iconName": "bike",
           "landmarkId": 11
         },
         {
-          "label": "Bustling Market",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Skateboard",
+          "iconType": "MCI",
+          "iconName": "skateboard",
           "landmarkId": 12
         },
         {
-          "label": "Street Performance",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Scooter",
+          "iconType": "MCI",
+          "iconName": "scooter",
           "landmarkId": 13
         },
         {
-          "label": "Museum Exhibit",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Roller Skates",
+          "iconType": "MCI",
+          "iconName": "roller-skate",
           "landmarkId": 14
         },
         {
-          "label": "Public Park",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Food Truck",
+          "iconType": "FA5",
+          "iconName": "truck",
           "landmarkId": 15
         },
         {
-          "label": "Iconic Building",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Ambulance",
+          "iconType": "FA5",
+          "iconName": "ambulance",
           "landmarkId": 16
         },
         {
-          "label": "Bustling Market",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Fire Station",
+          "iconType": "FA5",
+          "iconName": "fire",
           "landmarkId": 17
         },
         {
-          "label": "Street Performance",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Fire Truck",
+          "iconType": "MCI",
+          "iconName": "fire-truck",
           "landmarkId": 18
         },
         {
-          "label": "Museum Exhibit",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Hospital",
+          "iconType": "FA5",
+          "iconName": "hospital-symbol",
           "landmarkId": 19
         },
         {
-          "label": "Public Park",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Hydrant",
+          "iconType": "MCI",
+          "iconName": "fire-hydrant",
           "landmarkId": 20
         },
         {
-          "label": "Iconic Building",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Bar",
+          "iconType": "FA5",
+          "iconName": "beer",
           "landmarkId": 21
         },
         {
-          "label": "Bustling Market",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Police",
+          "iconType": "MCI",
+          "iconName": "police-badge",
           "landmarkId": 22
         },
         {
-          "label": "Street Performance",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Police Station",
+          "iconType": "MCI",
+          "iconName": "police-station",
           "landmarkId": 23
         },
         {
-          "label": "Museum Exhibit",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Garbage Can",
+          "iconType": "FA5",
+          "iconName": "trash-alt",
           "landmarkId": 24
         },
         {
-          "label": "Public Park",
-          "iconType": "MI",
-          "iconName": "location-city",
+          "label": "Theater",
+          "iconType": "MCI",
+          "iconName": "theater",
           "landmarkId": 25
+        },
+        {
+          "label": "Coffee Shop",
+          "iconType": "FA5",
+          "iconName": "coffee",
+          "landmarkId": 26
+        },
+        {
+          "label": "Record Store",
+          "iconType": "FA5",
+          "iconName": "record-vinyl",
+          "landmarkId": 27
         }
       ]
     },
@@ -165,24 +177,166 @@ export const boards = [
       "squares": [
         {
           "label": "Mountain Peak",
+          "landmarkId": 1,
+          "iconType": "FA5",
+          "iconName": "mountain",
+        },
+        {
+          "label": "Horse",
+          "landmarkId": 2,
+          "iconType": "FA5",
+          "iconName": "horse",
+        },
+        {
+          "label": "Cow",
+          "landmarkId": 3,
+          "iconType": "MCI",
+          "iconName": "cow",
+        },
+        {
+          "label": "Cat",
+          "landmarkId": 4,
+          "iconType": "FA5",
+          "iconName": "cat",
+        },
+        {
+          "label": "Dog",
+          "landmarkId": 5,
+          "iconType": "FA5",
+          "iconName": "dog",
+        },
+        {
+          "label": "Sheep",
+          "landmarkId": 5,
+          "iconType": "MCI",
+          "iconName": "sheep",
+        },
+        {
+          "label": "Police",
+          "iconType": "MCI",
+          "iconName": "police-badge",
           "landmarkId": 6
         },
         {
-          "label": "Waterfall",
+          "label": "Police Station",
+          "iconType": "MCI",
+          "iconName": "police-station",
           "landmarkId": 7
         },
         {
-          "label": "Desert Landscape",
+          "label": "Water Tower",
+          "iconType": "MCI",
+          "iconName": "tower-fire",
           "landmarkId": 8
         },
         {
-          "label": "Sandy Beach",
+          "label": "Hydrant",
+          "iconType": "MCI",
+          "iconName": "fire-hydrant",
           "landmarkId": 9
         },
         {
-          "label": "Forest Trail",
+          "label": "Cell Tower",
+          "iconType": "FA5",
+          "iconName": "broadcast-tower",
           "landmarkId": 10
-        }
+        },
+        {
+          "label": "Power Lines",
+          "iconType": "MCI",
+          "iconName": "transmission-tower",
+          "landmarkId": 11
+        },
+        {
+          "label": "Well",
+          "iconType": "MCI",
+          "iconName": "water-well",
+          "landmarkId": 12
+        },
+        {
+          "label": "Satellite Dish",
+          "iconType": "FA5",
+          "iconName": "satellite-dish",
+          "landmarkId": 13
+        },
+        {
+          "label": "Tractor",
+          "iconType": "FA5",
+          "iconName": "tractor",
+          "landmarkId": 14
+        },
+        {
+          "label": "Silo",
+          "iconType": "MCI",
+          "iconName": "silo",
+          "landmarkId": 14
+        },
+        {
+          "label": "Corn Field",
+          "iconType": "MCI",
+          "iconName": "corn",
+          "landmarkId": 15
+        },
+        {
+          "label": "Hay Bale",
+          "iconType": "MCI",
+          "iconName": "pitchfork",
+          "landmarkId": 16
+        },
+        {
+          "label": "Shovel",
+          "iconType": "MCI",
+          "iconName": "shovel",
+          "landmarkId": 17
+        },
+        {
+          "label": "Garden",
+          "iconType": "MCI",
+          "iconName": "watering-can",
+          "landmarkId": 18
+        },
+        {
+          "label": "Cemetary",
+          "iconType": "MCI",
+          "iconName": "grave-stone",
+          "landmarkId": 19
+        },
+        {
+          "label": "Wind Mill",
+          "iconType": "MCI",
+          "iconName": "wind-turbine",
+          "landmarkId": 20
+        },
+        {
+          "label": "Bell",
+          "iconType": "FA5",
+          "iconName": "bell",
+          "landmarkId": 21
+        },
+        {
+          "label": "Pool",
+          "iconType": "FA5",
+          "iconName": "swimming-pool",
+          "landmarkId": 22
+        },
+        {
+          "label": "For Sale",
+          "iconType": "MCI",
+          "iconName": "sign-real-estate",
+          "landmarkId": 23
+        },
+        {
+          "label": "Speed Limit",
+          "iconType": "MI",
+          "iconName": "speed",
+          "landmarkId": 24
+        },
+        {
+          "label": "Rail Crossing",
+          "iconType": "MCI",
+          "iconName": "railroad-light",
+          "landmarkId": 25
+        },
       ]
     },
     {

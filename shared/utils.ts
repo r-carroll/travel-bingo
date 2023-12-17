@@ -1,6 +1,6 @@
 export function convertTo2DArray(array: Array<any>): any {
-    if (array.length !== 25) {
-      throw new Error("The input array must have 25 elements.");
+    if (array.length < 25) {
+      throw new Error("The input array must have at least 25 elements.");
     }
   
     const result = [];
