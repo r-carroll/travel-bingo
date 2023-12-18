@@ -337,34 +337,194 @@ export const boards = [
           "iconName": "railroad-light",
           "landmarkId": 25
         },
+        {
+          "label": "Farmhouse",
+          "landmarkId": 26,
+          "iconType": "MI",
+          "iconName": "house",
+        },
+        {
+          "label": "Schoolhouse",
+          "landmarkId": 27,
+          "iconType": "FA5",
+          "iconName": "school",
+        },
+        {
+          "label": "Bird",
+          "landmarkId": 28,
+          "iconType": "MCI",
+          "iconName": "bird",
+        },
+        {
+          "label": "Church",
+          "landmarkId": 29,
+          "iconType": "MCI",
+          "iconName": "church",
+        },
+        {
+          "label": "Barn",
+          "landmarkId": 30,
+          "iconType": "MCI",
+          "iconName": "barn",
+        },
       ]
     },
     {
       "id": 3,
-      "name": "Amish Country",
+      "name": "Farm Country",
       "iconType": "MCI",
       "iconName": "wheel-barrow",
       "squares": [
         {
-          "label": "Traditional Dance Performance",
-          "landmarkId": 11
+          "label": "Buggy",
+          "iconType": "MCI",
+          "iconName": "triangle-outline",
+          "landmarkId": 1
         },
         {
-          "label": "Local Festival",
-          "landmarkId": 12
+          "label": "Hay Bale",
+          "iconType": "MCI",
+          "iconName": "pitchfork",
+          "landmarkId": 2
         },
         {
-          "label": "Religious Site",
-          "landmarkId": 13
+          "label": "Tractor",
+          "iconType": "FA5",
+          "iconName": "tractor",
+          "landmarkId": 3
         },
         {
-          "label": "Artisan Market",
-          "landmarkId": 14
+          "label": "Silo",
+          "iconType": "MCI",
+          "iconName": "silo",
+          "landmarkId": 4
         },
         {
-          "label": "Historical Landmark",
-          "landmarkId": 15
-        }
+          "label": "Corn Field",
+          "iconType": "MCI",
+          "iconName": "corn",
+          "landmarkId": 5
+        },
+        {
+          "label": "Shovel",
+          "iconType": "MCI",
+          "iconName": "shovel",
+          "landmarkId": 6
+        },
+        {
+          "label": "Horse",
+          "landmarkId": 7,
+          "iconType": "FA5",
+          "iconName": "horse",
+        },
+        {
+          "label": "Cow",
+          "landmarkId": 8,
+          "iconType": "MCI",
+          "iconName": "cow",
+        },
+        {
+          "label": "Clothes Line",
+          "landmarkId": 9,
+          "iconType": "FA5",
+          "iconName": "tshirt",
+        },
+        {
+          "label": "Quilt",
+          "landmarkId": 10,
+          "iconType": "MI",
+          "iconName": "view-quilt",
+        },
+        {
+          "label": "Farmhouse",
+          "landmarkId": 11,
+          "iconType": "MI",
+          "iconName": "house",
+        },
+        {
+          "label": "Schoolhouse",
+          "landmarkId": 12,
+          "iconType": "MCI",
+          "iconName": "chair-school",
+        },
+        {
+          "label": "Hat",
+          "landmarkId": 13,
+          "iconType": "FA5",
+          "iconName": "hat-cowboy",
+        },
+        {
+          "label": "Pig",
+          "landmarkId": 14,
+          "iconType": "MCI",
+          "iconName": "pig-variant",
+        },
+        {
+          "label": "Bird",
+          "landmarkId": 15,
+          "iconType": "MCI",
+          "iconName": "bird",
+        },
+        {
+          "label": "Auction Sign",
+          "landmarkId": 16,
+          "iconType": "MCI",
+          "iconName": "sign-real-estate",
+        },
+        {
+          "label": "Furniture Shop",
+          "landmarkId": 17,
+          "iconType": "MCI",
+          "iconName": "table-chair",
+        },
+        {
+          "label": "Fruit Stand",
+          "iconType": "MCI",
+          "iconName": "food-apple",
+          "landmarkId": 18
+        },
+        {
+          "label": "Apple Grove",
+          "iconType": "MCI",
+          "iconName": "food-apple",
+          "landmarkId": 19
+        },
+        {
+          "label": "Goats",
+          "iconType": "MI",
+          "iconName": "goat",
+          "landmarkId": 20
+        },
+        {
+          "label": "Covered Bridge",
+          "iconType": "MCI",
+          "iconName": "bridge",
+          "landmarkId": 21
+        },
+        {
+          "label": "Bike",
+          "iconType": "MCI",
+          "iconName": "bike",
+          "landmarkId": 22
+        },
+        {
+          "label": "Church",
+          "landmarkId": 23,
+          "iconType": "MCI",
+          "iconName": "church",
+        },
+        {
+          "label": "Barn",
+          "landmarkId": 24,
+          "iconType": "MCI",
+          "iconName": "barn",
+        },
+        {
+          "label": "Outhouse",
+          "landmarkId": 25,
+          "iconType": "FA5",
+          "iconName": "moon",
+        },
       ]
     },
     {

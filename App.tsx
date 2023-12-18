@@ -26,6 +26,7 @@ export default function App() {
         name="PlayBoard"
         component={PlayBoard}
         options={({ route }) => ({
+          title: ''
         })}
       />
       </Stack.Navigator>
