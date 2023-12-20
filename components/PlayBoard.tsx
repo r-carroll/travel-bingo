@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Modal } from 'react-native';
 import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'; 
-import { convertTo2DArray, shuffleArray } from '../shared/utils';
+import { convertTo2DArray, shuffleArray, storeData, getData } from '../shared/utils';
 
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
@@ -42,7 +42,16 @@ const PlayBoard = ({navigation, route }) => {
   }
 
   const [board, setBoard] = useState(prepareBoard);
+  const [modalVisible, setModalVisible] = useState(false);
   const [isBingo, setIsBingo] = useState(false);
+
+  useEffect(() => {
+    getData('board').then(data => {
+      if (data) {
+        setBoard(data);
+      }
+    })
+  }, [])
 
   useEffect(() => {
     for (const row of board.squares) {
@@ -76,7 +85,8 @@ const PlayBoard = ({navigation, route }) => {
       })
     })
 
-    setBoard(updatedBoard)
+    setBoard(updatedBoard);
+    storeData('board', updatedBoard);
   };
 
   const toggleBingo = () => {
@@ -150,6 +160,34 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
+  <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={modalStyles.centeredView}>
+          <View style={modalStyles.modalView}>
+            <Text style={modalStyles.modalText}>Reset the board?</Text>
+            <View style={{marginVertical: 10}}>
+              <Button
+                title="Reset"
+                onPress={() => {
+                  setModalVisible(false);
+                  resetBoard();
+                }}
+              />
+            </View>
+            <View style={{marginVertical: 10}}>
+              <Button
+                title="Cancel"
+                onPress={() => {setModalVisible(false)}}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
   <BingoVictoryOverlay />
   <View style={styles.container}>
   <Text style={styles.boardTitle}>{board.name}</Text>
@@ -167,6 +205,12 @@ const PlayBoard = ({navigation, route }) => {
       }}
       numColumns={5} 
     />
+    </View>
+    <View style={styles.resetButtonContainer}>
+      <Button
+          title="Reset Board"
+          onPress={() => {setModalVisible(true)}}
+      />
     </View>
   </>
   );
@@ -218,6 +262,47 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.text,
     paddingBottom: 10
+  },
+  resetButtonContainer: {
+    position: 'absolute',
+    bottom: 30,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+const modalStyles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
   

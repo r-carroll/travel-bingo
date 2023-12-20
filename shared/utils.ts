@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export function convertTo2DArray(array: Array<any>): any {
     if (array.length < 25) {
       throw new Error("The input array must have at least 25 elements.");
@@ -22,4 +24,23 @@ export function shuffleArray(array: Array<any>) {
 
     return array;
 }
+
+export const storeData = (key: string, value: any) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      console.log('there was an error persisting the board', e);
+    }
+  };
+
+
+export const getData = async (key: string) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+        console.log('there was an error reading saved the board', e);
+    }
+  };
   
