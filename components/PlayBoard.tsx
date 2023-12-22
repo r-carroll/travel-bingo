@@ -43,14 +43,15 @@ const PlayBoard = ({navigation, route }) => {
   }
 
   const [board, setBoard] = useState(prepareBoard);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [resetModalVisible, setResetModalVisible] = useState(false);
+  const [initModalVisible, setInitModalVisible] = useState(false);
   const [isBingo, setIsBingo] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
     getData(board.id.toString()).then(data => {
       if (data) {
-        setBoard(data);
+        setInitModalVisible(true);
       }
     })
   }, [])
@@ -162,14 +163,55 @@ const PlayBoard = ({navigation, route }) => {
     );
   }
 
-  return (
-  <>
-  <Modal
+  const InitModal = () => {
+    return (
+      <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={initModalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setInitModalVisible(!initModalVisible);
+        }}>
+        <View style={modalStyles.centeredView}>
+          <View style={modalStyles.modalView}>
+            <Text style={modalStyles.modalText}>Load saved game?</Text>
+            <View style={{marginVertical: 10}}>
+              <Button
+                title="Load"
+                onPress={() => {
+                  getData(board.id.toString()).then(data => {
+                    if (data) {
+                      setInitModalVisible(false);
+                      setBoard(data);
+                    }
+                  })
+                }}
+              />
+            </View>
+            <View style={{marginVertical: 10}}>
+              <Button
+                title="New Game"
+                onPress={() => {
+                  resetBoard();
+                  removeData(board.id.toString());
+                  setInitModalVisible(false);
+                }}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
+    )
+  }
+
+  const ResetModal = () => {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={resetModalVisible}
+        onRequestClose={() => {
+          setResetModalVisible(!resetModalVisible);
         }}>
         <View style={modalStyles.centeredView}>
           <View style={modalStyles.modalView}>
@@ -178,7 +220,7 @@ const PlayBoard = ({navigation, route }) => {
               <Button
                 title="Reset"
                 onPress={() => {
-                  setModalVisible(false);
+                  setResetModalVisible(false);
                   resetBoard();
                 }}
               />
@@ -186,12 +228,19 @@ const PlayBoard = ({navigation, route }) => {
             <View style={{marginVertical: 10}}>
               <Button
                 title="Cancel"
-                onPress={() => {setModalVisible(false)}}
+                onPress={() => {setResetModalVisible(false)}}
               />
             </View>
           </View>
         </View>
       </Modal>
+    )
+  }
+
+  return (
+  <>
+  <InitModal />
+  <ResetModal />
   <BingoVictoryOverlay />
   <View style={styles.container}>
   <Text style={styles.boardTitle}>{board.name}</Text>
@@ -213,7 +262,7 @@ const PlayBoard = ({navigation, route }) => {
     <View style={styles.resetButtonContainer}>
       <Button
           title="Reset Board"
-          onPress={() => {setModalVisible(true)}}
+          onPress={() => {setResetModalVisible(true)}}
       />
     </View>
   </>
