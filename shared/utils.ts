@@ -44,3 +44,10 @@ export const getData = async (key: string) => {
     }
   };
   
+  export const removeData = (key: string) => {
+    try {
+      AsyncStorage.removeItem(key)
+    } catch(e) {
+      console.log('there was an error deleting the saved board', e);
+    }
+  }

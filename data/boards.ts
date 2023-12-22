@@ -367,6 +367,18 @@ export const boards = [
           "iconType": "MCI",
           "iconName": "barn",
         },
+        {
+          "label": "Gas Station",
+          "iconType": "FA5",
+          "iconName": "gas-pump",
+          "landmarkId": 31
+        },
+        {
+          "label": "Motorcycle",
+          "iconType": "FA5",
+          "iconName": "motorcycle",
+          "landmarkId": 32
+        },
       ]
     },
     {
@@ -442,7 +454,7 @@ export const boards = [
           "iconName": "house",
         },
         {
-          "label": "Schoolhouse",
+          "label": "School",
           "landmarkId": 12,
           "iconType": "MCI",
           "iconName": "chair-school",
@@ -528,31 +540,161 @@ export const boards = [
       ]
     },
     {
-      "id": 3,
+      "id": 4,
       "name": "Interstate",
       "iconType": "MCI",
       "iconName": "highway",
       "squares": [
         {
-          "label": "Traditional Dance Performance",
-          "landmarkId": 11
+          "label": "Train",
+          "iconType": "MCI",
+          "iconName": "train-car-passenger-door-open",
+          "landmarkId": 1
         },
         {
-          "label": "Local Festival",
-          "landmarkId": 12
+          "label": "Camper Trailer",
+          "iconType": "FA5",
+          "iconName": "caravan",
+          "landmarkId": 2
         },
         {
-          "label": "Religious Site",
-          "landmarkId": 13
+          "label": "Utility Van",
+          "iconType": "MCI",
+          "iconName": "van-utility",
+          "landmarkId": 3
         },
         {
-          "label": "Artisan Market",
-          "landmarkId": 14
+          "label": "Passenger Van",
+          "iconType": "MCI",
+          "iconName": "van-passenger",
+          "landmarkId": 4
         },
         {
-          "label": "Historical Landmark",
-          "landmarkId": 15
-        }
+          "label": "Speed Limit",
+          "iconType": "MC",
+          "iconName": "speed",
+          "landmarkId": 5
+        },
+        {
+          "label": "Police",
+          "iconType": "MCI",
+          "iconName": "police-badge",
+          "landmarkId": 6
+        },
+        {
+          "label": "Ambulance",
+          "iconType": "FA5",
+          "iconName": "ambulance",
+          "landmarkId": 7
+        },
+        {
+          "label": "RV",
+          "landmarkId": 8,
+          "iconType": "MCI",
+          "iconName": "rv-truck",
+        },
+        {
+          "label": "Fire Truck",
+          "landmarkId": 9,
+          "iconType": "MCI",
+          "iconName": "fire-truck",
+        },
+        {
+          "label": "Tow Truck",
+          "landmarkId": 10,
+          "iconType": "MCI",
+          "iconName": "tow-truck",
+        },
+        {
+          "label": "Flatbed",
+          "landmarkId": 11,
+          "iconType": "MCI",
+          "iconName": "truck-flatbed",
+        },
+        {
+          "label": "Car Trailer",
+          "landmarkId": 12,
+          "iconType": "MCI",
+          "iconName": "truck-trailer",
+        },
+        {
+          "label": "Semi Truck",
+          "landmarkId": 13,
+          "iconType": "FA5",
+          "iconName": "truck",
+        },
+        {
+          "label": "Tanker Truck",
+          "landmarkId": 14,
+          "iconType": "MCI",
+          "iconName": "tanker-truck",
+        },
+        {
+          "label": "Bird",
+          "landmarkId": 15,
+          "iconType": "MCI",
+          "iconName": "bird",
+        },
+        {
+          "label": "Silo",
+          "iconType": "MCI",
+          "iconName": "silo",
+          "landmarkId": 16
+        },
+        {
+          "label": "Rest Area",
+          "landmarkId": 17,
+          "iconType": "FA5",
+          "iconName": "restroom",
+        },
+        {
+          "label": "Gas Station",
+          "iconType": "FA5",
+          "iconName": "gas-pump",
+          "landmarkId": 18
+        },
+        {
+          "label": "Tree Grove",
+          "iconType": "MCI",
+          "iconName": "food-apple",
+          "landmarkId": 19
+        },
+        {
+          "label": "Work Zone",
+          "iconType": "MCI",
+          "iconName": "sign-caution",
+          "landmarkId": 20
+        },
+        {
+          "label": "Overpass",
+          "iconType": "MCI",
+          "iconName": "highway",
+          "landmarkId": 21
+        },
+        {
+          "label": "Motorcycle",
+          "iconType": "FA5",
+          "iconName": "motorcycle",
+          "landmarkId": 22
+        },
+        {
+          "label": "Sports Car",
+          "landmarkId": 23,
+          "iconType": "MCI",
+          "iconName": "car-sports",
+        },
+        {
+          "label": "Bus",
+          "iconType": "MCI",
+          "iconName": "bus",
+          "landmarkId": 24
+        },
+        {
+          "label": "School-bus",
+          "landmarkId": 25,
+          "iconType": "MCI",
+          "iconName": "bus-school",
+        },
       ]
     }
   ]

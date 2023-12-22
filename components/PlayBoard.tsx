@@ -3,11 +3,12 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Modal } fro
 import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'; 
-import { convertTo2DArray, shuffleArray, storeData, getData } from '../shared/utils';
+import { convertTo2DArray, shuffleArray, storeData, getData, removeData } from '../shared/utils';
 
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
 import { boards } from '../data/boards';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
@@ -44,9 +45,10 @@ const PlayBoard = ({navigation, route }) => {
   const [board, setBoard] = useState(prepareBoard);
   const [modalVisible, setModalVisible] = useState(false);
   const [isBingo, setIsBingo] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
-    getData('board').then(data => {
+    getData(board.id.toString()).then(data => {
       if (data) {
         setBoard(data);
       }
@@ -86,25 +88,25 @@ const PlayBoard = ({navigation, route }) => {
     })
 
     setBoard(updatedBoard);
-    storeData('board', updatedBoard);
+    storeData(board.id.toString(), updatedBoard);
   };
 
   const toggleBingo = () => {
+    setIsGameOver(true)
     setIsBingo(!isBingo);
   };
   
   const resetBoard = () => {
     setIsBingo(false);
     setBoard(prepareBoard);
+    removeData(board.id.toString());
   }
 
-  const BingoVictoryOverlay = () => {
-    if (!isBingo) return null;
-  
+  const BingoVictoryOverlay = () => {  
     return (
       <View>
       <Overlay
-        isVisible={isBingo}
+        isVisible={isBingo && !isGameOver}
         fullScreen={false}
         
       >
@@ -127,8 +129,10 @@ const PlayBoard = ({navigation, route }) => {
 
           <Button
             title="Back to board select"
-            onPress={() =>
-              navigation.navigate('SelectBoard')
+            onPress={() => {
+                removeData(board.id.toString());
+                navigation.navigate('SelectBoard');
+              } 
             }
           />
       </Overlay>
@@ -153,7 +157,7 @@ const PlayBoard = ({navigation, route }) => {
                 color="#333"
                 style={{padding: 5}}
               />
-              <Text style={styles.squareText}>{square.label}</Text>
+              <Text style={styles.squareText} numberOfLines={4}>{square.label}</Text>
             </TouchableOpacity>
     );
   }
@@ -219,8 +223,8 @@ const PlayBoard = ({navigation, route }) => {
 export default PlayBoard;
 
 const colors = {
-  primary: '#f5f5f5',
-  accent: '#00ff00',
+  primary: 'rgba(255, 255, 255, 0.85)',
+  accent: 'rgba(0, 128, 0, 0.5)',
   text: '#333',
 };
 
@@ -228,6 +232,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primary,
+    backdropFilter: 'blur(5px)'
   },
   modalText: {
     margin: 20,
@@ -244,12 +249,14 @@ const styles = StyleSheet.create({
   },
   square: {
     width: squareWidth,
-    height: 60,
-    margin: 5,
-    borderRadius: 5,
-    backgroundColor: '#fff',
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'rgba(200, 200, 200, 0.7)', // Semi-transparent gray
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(150, 150, 150, 0.5)', // Light gray border
+    margin: 5,
   },
   selectedSquare: {
     backgroundColor: colors.accent,
@@ -259,6 +266,8 @@ const styles = StyleSheet.create({
   },
   squareText: {
     fontWeight: 'bold',
+    fontSize: RFPercentage(1.3),
+    width: '100%',
     textAlign: 'center',
     color: colors.text,
     paddingBottom: 10
