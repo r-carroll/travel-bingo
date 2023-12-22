@@ -8,7 +8,7 @@ import { convertTo2DArray, shuffleArray, storeData, getData, removeData } from '
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
 import { boards } from '../data/boards';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
