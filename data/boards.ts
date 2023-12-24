@@ -206,12 +206,6 @@ export const boards = [
           "iconName": "dog",
         },
         {
-          "label": "Sheep",
-          "landmarkId": 5,
-          "iconType": "MCI",
-          "iconName": "sheep",
-        },
-        {
           "label": "Police",
           "iconType": "MCI",
           "iconName": "police-badge",
@@ -263,12 +257,6 @@ export const boards = [
           "label": "Tractor",
           "iconType": "FA5",
           "iconName": "tractor",
-          "landmarkId": 14
-        },
-        {
-          "label": "Silo",
-          "iconType": "MCI",
-          "iconName": "silo",
           "landmarkId": 14
         },
         {
@@ -344,7 +332,7 @@ export const boards = [
           "iconName": "house",
         },
         {
-          "label": "Schoolhouse",
+          "label": "School",
           "landmarkId": 27,
           "iconType": "FA5",
           "iconName": "school",
@@ -378,6 +366,18 @@ export const boards = [
           "iconType": "FA5",
           "iconName": "motorcycle",
           "landmarkId": 32
+        },
+        {
+          "label": "Sheep",
+          "landmarkId": 33,
+          "iconType": "MCI",
+          "iconName": "sheep",
+        },
+        {
+          "label": "Silo",
+          "iconType": "MCI",
+          "iconName": "silo",
+          "landmarkId": 34
         },
       ]
     },
@@ -694,7 +694,7 @@ export const boards = [
           "landmarkId": 25,
           "iconType": "MCI",
           "iconName": "bus-school",
-        },
+        }
       ]
     }
   ]
