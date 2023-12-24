@@ -4,6 +4,7 @@ import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'; 
 import { convertTo2DArray, shuffleArray, storeData, getData, removeData } from '../shared/utils';
+import {LinearGradient} from 'expo-linear-gradient';
 
 import { Dimensions } from 'react-native';
 import _ from 'lodash';
@@ -118,24 +119,33 @@ const PlayBoard = ({navigation, route }) => {
             loop
             style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 200 }}
           />
-          <Button
-            title="Play Again!"
-            onPress={resetBoard}
-          />
+          <View style={{paddingVertical: 10}}>
+            <Button
+              title="Play Again!"
+              color={'#688FAB'}
+              onPress={resetBoard}
+            />
+          </View>
           
-          <Button
-            title="Return to Board"
-            onPress={toggleBingo}
-          />
+          <View style={{paddingVertical: 10}}>
+            <Button
+              title="Return to Board"
+              color={'#688FAB'}
+              onPress={toggleBingo}
+            />
+          </View>
 
-          <Button
-            title="Back to board select"
-            onPress={() => {
-                removeData(board.id.toString());
-                navigation.navigate('SelectBoard');
-              } 
-            }
-          />
+          <View style={{paddingVertical: 10}}>
+            <Button
+              title="Back to board select"
+              color={'#688FAB'}
+              onPress={() => {
+                  removeData(board.id.toString());
+                  navigation.navigate('SelectBoard');
+                }
+              }
+            />
+          </View>
       </Overlay>
       </View>
     );
@@ -178,6 +188,7 @@ const PlayBoard = ({navigation, route }) => {
             <View style={{marginVertical: 10}}>
               <Button
                 title="Load"
+                color={'#688FAB'}
                 onPress={() => {
                   getData(board.id.toString()).then(data => {
                     if (data) {
@@ -191,6 +202,7 @@ const PlayBoard = ({navigation, route }) => {
             <View style={{marginVertical: 10}}>
               <Button
                 title="New Game"
+                color={'#688FAB'}
                 onPress={() => {
                   resetBoard();
                   removeData(board.id.toString());
@@ -239,6 +251,7 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
+  <LinearGradient colors={['#90BEDE', '#90F3FF', '#DFFDFF']} style={styles.linearGradient} locations={[0.15, 0.60, 0.85]}>
   <InitModal />
   <ResetModal />
   <BingoVictoryOverlay />
@@ -261,10 +274,12 @@ const PlayBoard = ({navigation, route }) => {
     </View>
     <View style={styles.resetButtonContainer}>
       <Button
+          color={'#688FAB'}
           title="Reset Board"
           onPress={() => {setResetModalVisible(true)}}
       />
     </View>
+    </LinearGradient>
   </>
   );
 };
@@ -280,7 +295,6 @@ const colors = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
     backdropFilter: 'blur(5px)'
   },
   modalText: {
@@ -294,21 +308,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
-    color: colors.text,
+    color: '#DFFDFF',
   },
   square: {
     width: squareWidth,
     height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(200, 200, 200, 0.7)', // Semi-transparent gray
+    backgroundColor: 'rgba(229, 225, 238, 0.2)',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'rgba(150, 150, 150, 0.5)', // Light gray border
     margin: 5,
   },
   selectedSquare: {
-    backgroundColor: colors.accent,
+    backgroundColor: 'rgba(104, 237, 198, 0.7)',
   },
   unselectedSquare: {
     backgroundColor: colors.primary,
@@ -328,6 +342,10 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  linearGradient: {
+    flex: 1,
+    borderRadius: 5
   },
 });
 
