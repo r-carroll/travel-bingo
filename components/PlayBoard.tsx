@@ -315,14 +315,14 @@ const styles = StyleSheet.create({
     height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(229, 225, 238, 0.2)',
+    backgroundColor: 'rgba(229, 225, 238, 0.5)',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'rgba(150, 150, 150, 0.5)', // Light gray border
     margin: 5,
   },
   selectedSquare: {
-    backgroundColor: 'rgba(104, 237, 198, 0.7)',
+    backgroundColor: 'rgb(104, 237, 198)',
   },
   unselectedSquare: {
     backgroundColor: colors.primary,
