@@ -2,6 +2,7 @@ export const boards = [
     {
       "id": 1,
       "name": "City",
+      "type": "city",
       "iconType": "MI",
       "iconName": "location-city",
       "squares": [
@@ -172,6 +173,7 @@ export const boards = [
     {
       "id": 2,
       "name": "Backroads",
+      "type": "country",
       "iconType": "MCI",
       "iconName": "silo",
       "squares": [
@@ -384,6 +386,7 @@ export const boards = [
     {
       "id": 3,
       "name": "Farm Country",
+      "type": "farm",
       "iconType": "MCI",
       "iconName": "wheel-barrow",
       "squares": [
@@ -542,6 +545,7 @@ export const boards = [
     {
       "id": 4,
       "name": "Interstate",
+      "type": "interstate",
       "iconType": "MCI",
       "iconName": "highway",
       "squares": [

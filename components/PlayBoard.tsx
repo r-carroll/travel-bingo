@@ -10,6 +10,7 @@ import { Dimensions } from 'react-native';
 import _ from 'lodash';
 import { boards } from '../data/boards';
 import { RFPercentage } from "react-native-responsive-fontsize";
+import HeroComponent from './Hero';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
@@ -251,12 +252,12 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
-  <LinearGradient colors={['#90BEDE', '#90F3FF', '#DFFDFF']} style={styles.linearGradient} locations={[0.15, 0.60, 0.85]}>
+  <HeroComponent heroData={{type: board.type, title: board.name}} />
+  <LinearGradient colors={['#000000', '#A87C26', '#667F20', '#083104', '#031602']} style={styles.linearGradient} locations={[0.0, 0.21, 0.48, 0.7986, 1]}>
   <InitModal />
   <ResetModal />
   <BingoVictoryOverlay />
   <View style={styles.container}>
-  <Text style={styles.boardTitle}>{board.name}</Text>
   <FlatList
       data={board.squares}
       keyExtractor={(square) => square.landmarkId}
@@ -295,7 +296,7 @@ const colors = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backdropFilter: 'blur(5px)'
+    backdropFilter: 'blur(5px)',
   },
   modalText: {
     margin: 20,
@@ -303,26 +304,19 @@ const styles = StyleSheet.create({
     fontSize: 30, 
     fontWeight: 'bold'
   },
-  boardTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 20,
-    color: '#DFFDFF',
-  },
   square: {
     width: squareWidth,
     height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(229, 225, 238, 0.5)',
+    backgroundColor: 'rgba(222, 228, 206, 0.75)',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'rgba(150, 150, 150, 0.5)', // Light gray border
     margin: 5,
   },
   selectedSquare: {
-    backgroundColor: 'rgb(104, 237, 198)',
+    backgroundColor: 'gold',
   },
   unselectedSquare: {
     backgroundColor: colors.primary,
@@ -345,7 +339,6 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-    borderRadius: 5
   },
 });
 
