@@ -11,6 +11,8 @@ import _ from 'lodash';
 import { boards } from '../data/boards';
 import { RFPercentage } from "react-native-responsive-fontsize";
 import HeroComponent from './Hero';
+import { Audio } from 'expo-av';
+import HamburgerMenu from './HamburgerMenu';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
@@ -49,6 +51,7 @@ const PlayBoard = ({navigation, route }) => {
   const [initModalVisible, setInitModalVisible] = useState(false);
   const [isBingo, setIsBingo] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [isMenuVisible, setMenuVisibility] = useState(false);
 
   useEffect(() => {
     getData(board.id.toString()).then(data => {
@@ -78,9 +81,21 @@ const PlayBoard = ({navigation, route }) => {
       setIsBingo(true);
     }
 
-  }, [board])
+  }, [board]);
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync( require('../assets/tap.mp3')
+    );
+    await sound.playAsync();
+  }
+
+  const toggleMenu = () => {
+    setMenuVisibility(!isMenuVisible);
+  };
+
 
   const handleSquareSelection = (square) => {
+    playSound();
     let updatedBoard = _.cloneDeep(board)
     updatedBoard.squares.forEach(column => {
       column.forEach(currentSquare => {
@@ -252,6 +267,12 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
+   {/* <View style={styles.hamburger}>
+     <TouchableOpacity onPress={() => setMenuVisibility(true)}><Text style={styles.hamburgerIcon}>☰</Text></TouchableOpacity>
+   </View> */}
+  <View style={{zIndex: 5}}>
+      <HamburgerMenu/>
+  </View>
   <HeroComponent heroData={{type: board.type, title: board.name}} />
   <LinearGradient colors={['#000000', '#A87C26', '#667F20', '#083104', '#031602']} style={styles.linearGradient} locations={[0.0, 0.21, 0.48, 0.7986, 1]}>
   <InitModal />
@@ -340,6 +361,18 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
   },
+  hamburger: {
+    width: 60,  
+    height: 60,                          
+    position: 'absolute',                                          
+    top: 10,                                                    
+    right: 5, 
+    zIndex: 5
+  },
+  hamburgerIcon: {
+    fontSize: 40,
+    color: 'white'
+  }
 });
 
 const modalStyles = StyleSheet.create({
