@@ -28,11 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "70e0d062-76ae-4c08-867b-14660c4d0145"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
@@ -48,7 +43,12 @@
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "aecd7b4b-6b17-4aa6-91cc-3f6be2365f35"
+      }
+    }
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-0399277712358740~7478627629",

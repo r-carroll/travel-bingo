@@ -6,6 +6,7 @@ import SelectBoard from './components/SelectBoard';
 import '@expo/metro-runtime';
 import PlayBoard from './components/PlayBoard';
 import mobileAds, { MaxAdContentRating, AppOpenAd, BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+import { ClickOutsideProvider } from 'react-native-click-outside';
 
 mobileAds()
   .setRequestConfiguration({
@@ -27,24 +28,26 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <React.Suspense>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SelectBoard">
+    <ClickOutsideProvider>
+      <React.Suspense>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SelectBoard">
+          <Stack.Screen
+            name="SelectBoard"
+            component={SelectBoard}
+            options={{title: 'Choose a board'}}
+          />
         <Stack.Screen
-          name="SelectBoard"
-          component={SelectBoard}
-          options={{title: 'Choose a board'}}
+          name="PlayBoard"
+          component={PlayBoard}
+          options={({ route }) => ({
+            title: ''
+          })}
         />
-      <Stack.Screen
-        name="PlayBoard"
-        component={PlayBoard}
-        options={({ route }) => ({
-          title: ''
-        })}
-      />
-      </Stack.Navigator>
-    </NavigationContainer>
-    <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
-    </React.Suspense>
+        </Stack.Navigator>
+      </NavigationContainer>
+      <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+      </React.Suspense>
+    </ClickOutsideProvider>
   );
 }

@@ -89,11 +89,6 @@ const PlayBoard = ({navigation, route }) => {
     await sound.playAsync();
   }
 
-  const toggleMenu = () => {
-    setMenuVisibility(!isMenuVisible);
-  };
-
-
   const handleSquareSelection = (square) => {
     playSound();
     let updatedBoard = _.cloneDeep(board)
@@ -267,11 +262,8 @@ const PlayBoard = ({navigation, route }) => {
 
   return (
   <>
-   {/* <View style={styles.hamburger}>
-     <TouchableOpacity onPress={() => setMenuVisibility(true)}><Text style={styles.hamburgerIcon}>☰</Text></TouchableOpacity>
-   </View> */}
   <View style={{zIndex: 5}}>
-      <HamburgerMenu/>
+    <HamburgerMenu resetBoard={resetBoard}/>
   </View>
   <HeroComponent heroData={{type: board.type, title: board.name}} />
   <LinearGradient colors={['#000000', '#A87C26', '#667F20', '#083104', '#031602']} style={styles.linearGradient} locations={[0.0, 0.21, 0.48, 0.7986, 1]}>
