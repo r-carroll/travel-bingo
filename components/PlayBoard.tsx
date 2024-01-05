@@ -86,7 +86,6 @@ const PlayBoard = ({navigation, route }) => {
   }, [board]);
 
   async function playSound() {
-    console.log('is enabled? ', isSoundEnabled)
     if (isSoundEnabled) {
       const { sound } = await Audio.Sound.createAsync( require('../assets/tap.mp3')
       );

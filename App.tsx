@@ -7,8 +7,9 @@ import '@expo/metro-runtime';
 import PlayBoard from './components/PlayBoard';
 import mobileAds, { MaxAdContentRating, AppOpenAd, BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 import { ClickOutsideProvider } from 'react-native-click-outside';
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { SoundContext } from './shared/contexts';
+import { getData, storeData } from './shared/utils';
 
 
 mobileAds()
@@ -33,9 +34,19 @@ export default function App() {
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
   const toggleSound = () => {
-    console.log('toggling from app')
     setIsSoundEnabled(!isSoundEnabled);
   };
+
+  useEffect(() => {
+    getData('soundEnabled').then(data => {
+      if (data !== undefined && data !== null)
+      setIsSoundEnabled(data);
+    })
+  },[])
+
+  useEffect(() => {
+    storeData('soundEnabled', isSoundEnabled);
+  }, [isSoundEnabled])
   
   return (
     <ClickOutsideProvider>

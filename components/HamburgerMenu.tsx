@@ -13,6 +13,7 @@ const HamburgerMenu = ({resetBoard}) => {
 
 
   const toggleMenu = () => {
+    console.log('toggling menu ', isMenuVisible)
     const newPosition = isMenuVisible ? 200 : 0;
     Animated.timing(menuPosition, {
       toValue: newPosition,
