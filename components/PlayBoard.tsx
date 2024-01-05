@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Modal } from 'react-native';
 import { Overlay, Icon } from '@rneui/themed';
 import LottieView from "lottie-react-native";
@@ -13,6 +13,7 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 import HeroComponent from './Hero';
 import { Audio } from 'expo-av';
 import HamburgerMenu from './HamburgerMenu';
+import { SoundContext } from '../shared/contexts';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
@@ -52,6 +53,7 @@ const PlayBoard = ({navigation, route }) => {
   const [isBingo, setIsBingo] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isMenuVisible, setMenuVisibility] = useState(false);
+  const { isSoundEnabled } = useContext(SoundContext);
 
   useEffect(() => {
     getData(board.id.toString()).then(data => {
@@ -84,9 +86,12 @@ const PlayBoard = ({navigation, route }) => {
   }, [board]);
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync( require('../assets/tap.mp3')
-    );
-    await sound.playAsync();
+    console.log('is enabled? ', isSoundEnabled)
+    if (isSoundEnabled) {
+      const { sound } = await Audio.Sound.createAsync( require('../assets/tap.mp3')
+      );
+      await sound.playAsync();
+    }
   }
 
   const handleSquareSelection = (square) => {

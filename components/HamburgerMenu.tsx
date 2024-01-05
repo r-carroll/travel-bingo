@@ -1,14 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { View, TouchableOpacity, Text, Animated, StyleSheet, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { useClickOutside } from 'react-native-click-outside';
+import { SoundContext } from '../shared/contexts';
 
 const HamburgerMenu = ({resetBoard}) => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const screenHeight = useWindowDimensions().height;
   const menuPosition = useRef(new Animated.Value(200)).current;
-  let soundText = 'Sound On ';
+  const { toggleSound, isSoundEnabled } = useContext(SoundContext);
+
 
   const toggleMenu = () => {
     const newPosition = isMenuVisible ? 200 : 0;
@@ -20,7 +22,11 @@ const HamburgerMenu = ({resetBoard}) => {
     setMenuVisibility(!isMenuVisible);
   };
 
-  const ref = useClickOutside<View>(() => toggleMenu());
+  const ref = useClickOutside<View>(() => {
+    if (isMenuVisible) {
+      toggleMenu();
+    }
+  });
 
   return (
     <View style={{ flex: 1 }}>
@@ -43,9 +49,10 @@ const HamburgerMenu = ({resetBoard}) => {
             <TouchableOpacity onPress={resetBoard} style={styles.hamburgerItem}>
               <Text>Reset Board</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{}} style={styles.hamburgerItem}>
+            <TouchableOpacity onPress={toggleSound} style={styles.hamburgerItem}>
               <View style={{flexDirection: 'row', alignItems: 'center', display: 'flex'}}>
-                <Text style={{lineHeight:30}}>{soundText}</Text><MaterialIcons name="volume-up" size={24} color="black" />
+                {isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound On </Text><MaterialIcons name="volume-up" size={24} color="black" /></>}
+                {!isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound Off </Text><MaterialIcons name="volume-off" size={24} color="black" /></>}
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={toggleMenu} style={styles.hamburgerItem}>

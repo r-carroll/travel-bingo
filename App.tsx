@@ -7,6 +7,9 @@ import '@expo/metro-runtime';
 import PlayBoard from './components/PlayBoard';
 import mobileAds, { MaxAdContentRating, AppOpenAd, BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 import { ClickOutsideProvider } from 'react-native-click-outside';
+import { createContext, useState } from 'react';
+import { SoundContext } from './shared/contexts';
+
 
 mobileAds()
   .setRequestConfiguration({
@@ -27,8 +30,16 @@ mobileAds()
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+
+  const toggleSound = () => {
+    console.log('toggling from app')
+    setIsSoundEnabled(!isSoundEnabled);
+  };
+  
   return (
     <ClickOutsideProvider>
+      <SoundContext.Provider value={{ isSoundEnabled, toggleSound }}>
       <React.Suspense>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="SelectBoard">
@@ -48,6 +59,7 @@ export default function App() {
       </NavigationContainer>
       <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
       </React.Suspense>
+     </SoundContext.Provider>
     </ClickOutsideProvider>
   );
 }
