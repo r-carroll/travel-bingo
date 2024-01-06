@@ -4,16 +4,23 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { useClickOutside } from 'react-native-click-outside';
 import { SoundContext } from '../shared/contexts';
+import { Linking } from 'react-native';
+
 
 const HamburgerMenu = ({resetBoard}) => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
+  const [ref, setRef] = useState({});
   const screenHeight = useWindowDimensions().height;
   const menuPosition = useRef(new Animated.Value(200)).current;
   const { toggleSound, isSoundEnabled } = useContext(SoundContext);
 
+  const initialRef = useClickOutside<View>(() => {
+    if (isMenuVisible) {
+      toggleMenu();
+    }
+  });
 
   const toggleMenu = () => {
-    console.log('toggling menu ', isMenuVisible)
     const newPosition = isMenuVisible ? 200 : 0;
     Animated.timing(menuPosition, {
       toValue: newPosition,
@@ -21,13 +28,8 @@ const HamburgerMenu = ({resetBoard}) => {
       useNativeDriver: true,
     }).start();
     setMenuVisibility(!isMenuVisible);
+    setRef(initialRef)
   };
-
-  const ref = useClickOutside<View>(() => {
-    if (isMenuVisible) {
-      toggleMenu();
-    }
-  });
 
   return (
     <View style={{ flex: 1 }}>
@@ -56,7 +58,7 @@ const HamburgerMenu = ({resetBoard}) => {
                 {!isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound Off </Text><MaterialIcons name="volume-off" size={24} color="black" /></>}
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={toggleMenu} style={styles.hamburgerItem}>
+            <TouchableOpacity onPress={() => Linking.openURL('https://www.buymeacoffee.com/carrollmedia')} style={styles.hamburgerItem}>
               <Text>Buy me a coffee</Text>
             </TouchableOpacity>
           </View>

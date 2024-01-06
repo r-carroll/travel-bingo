@@ -1,14 +1,10 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { imageLibrary } from '../shared/utils';
 
 const HeroComponent = ({ heroData }) => {
-    const imageLibrary = {
-        city: require('../assets/images/city.jpg'),
-        country: require('../assets/images/road.jpg'),
-        farm: require('../assets/images/farm.jpg'),
-        interstate: require('../assets/images/interstate.jpg'),
-    }
+    
   return (
     <View style={styles.container}>
       <Image source={imageLibrary[heroData.type]} style={styles.heroImage} />

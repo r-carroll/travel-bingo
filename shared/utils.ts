@@ -51,3 +51,10 @@ export const getData = async (key: string) => {
       console.log('there was an error deleting the saved board', e);
     }
   }
+
+  export const imageLibrary = {
+    city: require('../assets/images/city.jpg'),
+    country: require('../assets/images/road.jpg'),
+    farm: require('../assets/images/farm.jpg'),
+    interstate: require('../assets/images/interstate.jpg'),
+}

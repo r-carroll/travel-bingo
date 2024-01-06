@@ -83,11 +83,23 @@ const PlayBoard = ({navigation, route }) => {
       setIsBingo(true);
     }
 
+    if (isBingo) {
+      playVictorySound();
+    }
+
   }, [board]);
 
   async function playSound() {
     if (isSoundEnabled) {
       const { sound } = await Audio.Sound.createAsync( require('../assets/tap.mp3')
+      );
+      await sound.playAsync();
+    }
+  }
+  
+  async function playVictorySound() {
+    if (isSoundEnabled) {
+      const { sound } = await Audio.Sound.createAsync( require('../assets/victory.mp3')
       );
       await sound.playAsync();
     }
@@ -270,34 +282,34 @@ const PlayBoard = ({navigation, route }) => {
     <HamburgerMenu resetBoard={resetBoard}/>
   </View>
   <HeroComponent heroData={{type: board.type, title: board.name}} />
-  <LinearGradient colors={['#000000', '#A87C26', '#667F20', '#083104', '#031602']} style={styles.linearGradient} locations={[0.0, 0.21, 0.48, 0.7986, 1]}>
-  <InitModal />
-  <ResetModal />
-  <BingoVictoryOverlay />
-  <View style={styles.container}>
-  <FlatList
-      data={board.squares}
-      keyExtractor={(square) => square.landmarkId}
-      renderItem={({item, index}) => {
-        return (
-          <View>
-            {item.map((square, columnIndex) => {
-              return renderSquare(square)
-            })}
-          </View>
-        )
-      }}
-      numColumns={5} 
-    />
-    </View>
-    <View style={styles.resetButtonContainer}>
-      <Button
-          color={'#688FAB'}
-          title="Reset Board"
-          onPress={() => {setResetModalVisible(true)}}
+    <LinearGradient colors={['#A87C26', '#667F20', '#083104', '#031602']} style={styles.linearGradient} locations={[0, 0.2, 0.7986, 1]}>
+    <InitModal />
+    <ResetModal />
+    <BingoVictoryOverlay />
+    <View style={styles.container}>
+    <FlatList
+        data={board.squares}
+        keyExtractor={(square) => square.landmarkId}
+        renderItem={({item, index}) => {
+          return (
+            <View>
+              {item.map((square, columnIndex) => {
+                return renderSquare(square)
+              })}
+            </View>
+          )
+        }}
+        numColumns={5}
       />
-    </View>
-    </LinearGradient>
+      </View>
+      <View style={styles.resetButtonContainer}>
+        <Button
+            color={'#688FAB'}
+            title="Reset Board"
+            onPress={() => {setResetModalVisible(true)}}
+        />
+      </View>
+      </LinearGradient>
   </>
   );
 };
@@ -314,6 +326,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backdropFilter: 'blur(5px)',
+    paddingTop: 25,
   },
   modalText: {
     margin: 20,
