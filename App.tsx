@@ -53,7 +53,11 @@ export default function App() {
       <SoundContext.Provider value={{ isSoundEnabled, toggleSound }}>
       <React.Suspense>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SelectBoard">
+        <Stack.Navigator initialRouteName="SelectBoard"
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: 'black' },
+        }}>
           <Stack.Screen
             name="SelectBoard"
             component={SelectBoard}
@@ -63,7 +67,9 @@ export default function App() {
           name="PlayBoard"
           component={PlayBoard}
           options={({ route }) => ({
-            title: ''
+            title: '',
+            headerBackTitle: 'Back to Board Select',
+            headerLargeStyle: false
           })}
         />
         </Stack.Navigator>

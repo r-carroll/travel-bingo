@@ -66,28 +66,29 @@ const PlayBoard = ({navigation, route }) => {
   useEffect(() => {
     for (const row of board.squares) {
       if (row.every(square => square.isSelected)) {
-        setIsBingo(true);
+        triggerBingo();
       }
     }
   
     for (let col = 0; col < board.squares[0].length; col++) {
       if (board.squares.every(row => row[col].isSelected)) {
-        setIsBingo(true);
+        triggerBingo();
       }
     }
   
     if (board.squares.every((row, i) => row[i].isSelected)) {
-      setIsBingo(true);
+      triggerBingo();
     }
     if (board.squares.every((row, i) => row[board.squares.length - 1 - i].isSelected)) {
-      setIsBingo(true);
-    }
-
-    if (isBingo) {
-      playVictorySound();
+      triggerBingo();
     }
 
   }, [board]);
+
+  function triggerBingo() {
+    playVictorySound();
+    setIsBingo(true);
+  }
 
   async function playSound() {
     if (isSoundEnabled) {
@@ -121,7 +122,7 @@ const PlayBoard = ({navigation, route }) => {
   };
 
   const toggleBingo = () => {
-    setIsGameOver(true)
+    setIsGameOver(true);
     setIsBingo(!isBingo);
   };
   
@@ -302,13 +303,6 @@ const PlayBoard = ({navigation, route }) => {
         numColumns={5}
       />
       </View>
-      <View style={styles.resetButtonContainer}>
-        <Button
-            color={'#688FAB'}
-            title="Reset Board"
-            onPress={() => {setResetModalVisible(true)}}
-        />
-      </View>
       </LinearGradient>
   </>
   );
@@ -358,14 +352,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.text,
     paddingBottom: 10
-  },
-  resetButtonContainer: {
-    position: 'absolute',
-    bottom: 30,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   linearGradient: {
     flex: 1,
