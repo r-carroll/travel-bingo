@@ -10,6 +10,7 @@ import { ClickOutsideProvider } from 'react-native-click-outside';
 import { createContext, useState, useEffect } from 'react';
 import { SoundContext } from './shared/contexts';
 import { getData, storeData } from './shared/utils';
+import TitleScreen from './components/TitleScreen';
 
 
 mobileAds()
@@ -53,12 +54,18 @@ export default function App() {
       <SoundContext.Provider value={{ isSoundEnabled, toggleSound }}>
       <React.Suspense>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SelectBoard"
+        <Stack.Navigator initialRouteName="TitleScreen"
         screenOptions={{
           headerTintColor: 'white',
           headerStyle: { backgroundColor: 'black' },
+          title: '',
+          headerShown: true
         }}>
-          <Stack.Screen
+        <Stack.Screen
+            name="TitleScreen"
+            component={TitleScreen}
+          />
+        <Stack.Screen
             name="SelectBoard"
             component={SelectBoard}
             options={{title: 'Choose a board'}}
