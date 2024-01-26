@@ -1,0 +1,22 @@
+<svg width="400" height="200" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="gradient">
+      <stop offset="0%" stop-color="#2ecc71" />
+      <stop offset="50%" stop-color="#20B2AA" />
+      <stop offset="100%" stop-color="#009688" />
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#gradient)" style="animation: gradient-animation 5s linear infinite;"/>
+
+  <style>
+    @keyframes gradient-animation {
+      0% {
+        offset-distance: 0%;
+      }
+      100% {
+        offset-distance: 100%;
+      }
+    }
+  </style>
+</svg>

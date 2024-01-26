@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useDeferredValue } from 'react';
-import { View, Text, Animated, StyleSheet, Image, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, useWindowDimensions, Animated, Platform } from 'react-native';
 import { Dimensions } from 'react-native';
-import { Canvas, LinearGradient, Rect, vec } from '@shopify/react-native-skia';
-import { useSharedValue, useDerivedValue, withTiming, Easing } from 'react-native-reanimated';
+import { Canvas, LinearGradient, Rect, vec, Text, useFont, useAnimatedImageValue, Image } from '@shopify/react-native-skia';
+import { useSharedValue, useDerivedValue, withTiming, Easing, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { useFonts } from 'expo-font';
 
 const getRandomColor = () => {
   const hexValues = [
@@ -21,17 +22,20 @@ const getRandomColor = () => {
 
 
 const LandingScreen = () => {
-  // const animatedGradientRef = useRef(null);
-  // const textAnimation = useRef(new Animated.Value(0)).current;
-  const path = `M 100 150 A 100 80 0 0 1 260 150`;
+  const textAnimation = useRef(new Animated.Value(0)).current;
+  const font = useFont(require("../assets/VastShadow-Regular.ttf"), 40);
   const { width, height } = useWindowDimensions();
   const leftColor = useSharedValue('blue');
   const rightColor = useSharedValue('green');
   const colors = useDerivedValue(() => {
     return [leftColor.value, rightColor.value];
   }, []);
-  // useEffect(() => {
-  //   // Animate text
+
+  const gif = useAnimatedImageValue(
+    require("../assets/giphy.gif")
+  );
+
+  // const bounce = () => {
   //   Animated.loop(
   //     Animated.sequence([
   //       Animated.timing(textAnimation, {
@@ -48,12 +52,37 @@ const LandingScreen = () => {
   //       }),
   //     ])
   //   ).start();
-  // }, []);
+  // }
+
+  useEffect(() => {
+    // Animate text
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(textAnimation, {
+          toValue: 15,
+          duration: 2000,
+          useNativeDriver: true,
+          easing: Easing.inOut(Easing.elastic(1)),
+        }),
+        Animated.timing(textAnimation, {
+          toValue: 0,
+          duration: 2000,
+          useNativeDriver: true,
+          easing: Easing.inOut(Easing.elastic(1)),
+        }),
+      ])
+    ).start();
+  }, []);
+
+  // const [fontsLoaded, fontError] = useFonts({
+  //   'Shadow-Regular': require('../assets/VastShadow-Regular.ttf'),
+  // });
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      leftColor.value = withTiming(getRandomColor(), { easing: Easing.inOut(Easing.elastic(1))});
-      rightColor.value = withTiming(getRandomColor(), { easing: Easing.inOut(Easing.elastic(1))});
+      leftColor.value = withTiming(getRandomColor(), { easing: Easing.linear, duration: 1000});
+      rightColor.value = withTiming(getRandomColor(), { easing: Easing.linear, duration: 1000});
     }, 750);
   
     return () => clearInterval(intervalId); // Cleanup on unmount
@@ -61,15 +90,33 @@ const LandingScreen = () => {
 
   return (
     <>
-      <Canvas style={styles.canvas}>
+      <Canvas style={styles.canvas} mode='continuous'>
         <Rect x={0} y={0} width={width} height={height} >
         <LinearGradient colors={colors} start={vec(0,0 )} end={vec(width, height )}/>
         </Rect>
+          
+          <Text text={'Travel Bingo'} font={font} x={10} y={40}/>
+          <Image
+            image={gif}
+            fit={'contain'}
+            x={0}
+            y={50}
+            width={320}
+            height={180}
+          />
       </Canvas>
-      {/* <Image
-        style={{ width: width, height: '100%' }}
-        source={require('../assets/Travel-Bingo.gif')}
-      /> */}
+      {/* <View style={styles.textContainer}>
+        <Text>Som ete</Text>
+      </View> */}
+      
+      {/* <Animated.View
+        style={[
+          styles.textContainer,
+          { transform: [{ translateY: textAnimation }] },
+        ]}
+      >
+          <Text style={styles.text}>Travel Bingo</Text>
+      </Animated.View> */}
     </>
   );
 };
@@ -78,12 +125,18 @@ const styles = StyleSheet.create({
   container: {
   },
   canvas: {
-    flex: 1
+    flex: 1,
+    zIndex: 100,
+    // position: 'absolute'
   },
   background: {
   },
   textContainer: {
-    top: 200,
+    flex: 1,
+    zIndex: 1,
+    position: 'absolute',
+    top: 0,
+    opacity: 1
   },
   text: {
   },
