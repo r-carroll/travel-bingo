@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useDeferredValue } from 'react';
-import { View, StyleSheet, useWindowDimensions, Animated, Platform } from 'react-native';
+import { View, StyleSheet, useWindowDimensions, Animated, Platform, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
-import { Canvas, LinearGradient, Rect, vec, Text, useFont, useAnimatedImageValue, Image } from '@shopify/react-native-skia';
+import { Canvas, LinearGradient, Rect, vec, Text, useFont, useAnimatedImageValue, Image, Skia, Group, TextPath, useImage } from '@shopify/react-native-skia';
 import { useSharedValue, useDerivedValue, withTiming, Easing, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { useFonts } from 'expo-font';
 
@@ -31,9 +31,13 @@ const LandingScreen = () => {
     return [leftColor.value, rightColor.value];
   }, []);
 
-  const gif = useAnimatedImageValue(
+  const animation = useAnimatedImageValue(
     require("../assets/giphy.gif")
   );
+
+  const cmLogo = useImage(require("../assets/CM-logo.gif"))
+
+  if (animation == null) return null;
 
   // const bounce = () => {
   //   Animated.loop(
@@ -74,11 +78,6 @@ const LandingScreen = () => {
     ).start();
   }, []);
 
-  // const [fontsLoaded, fontError] = useFonts({
-  //   'Shadow-Regular': require('../assets/VastShadow-Regular.ttf'),
-  // });
-
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       leftColor.value = withTiming(getRandomColor(), { easing: Easing.linear, duration: 1000});
@@ -90,33 +89,23 @@ const LandingScreen = () => {
 
   return (
     <>
+    <View style={{opacity: 0}}>
       <Canvas style={styles.canvas} mode='continuous'>
         <Rect x={0} y={0} width={width} height={height} >
         <LinearGradient colors={colors} start={vec(0,0 )} end={vec(width, height )}/>
         </Rect>
-          
-          <Text text={'Travel Bingo'} font={font} x={10} y={40}/>
-          <Image
+        <Text font={font} x={20} y={80} text={'Travel Bingo'}></Text>
+          {/* <Image
             image={gif}
             fit={'contain'}
-            x={0}
-            y={50}
+            x={100}
+            y={100}
             width={320}
             height={180}
-          />
+          /> */}
+          <Image image={cmLogo} fit={'scaleDown'} x={(width - 220) / 2} y={(height - 220) - 50} width={220} height={80} />
       </Canvas>
-      {/* <View style={styles.textContainer}>
-        <Text>Som ete</Text>
-      </View> */}
-      
-      {/* <Animated.View
-        style={[
-          styles.textContainer,
-          { transform: [{ translateY: textAnimation }] },
-        ]}
-      >
-          <Text style={styles.text}>Travel Bingo</Text>
-      </Animated.View> */}
+      </View>
     </>
   );
 };
@@ -125,21 +114,8 @@ const styles = StyleSheet.create({
   container: {
   },
   canvas: {
-    flex: 1,
-    zIndex: 100,
-    // position: 'absolute'
-  },
-  background: {
-  },
-  textContainer: {
-    flex: 1,
-    zIndex: 1,
-    position: 'absolute',
-    top: 0,
-    opacity: 1
-  },
-  text: {
-  },
+    flex: 1
+  }
 });
 
 export default LandingScreen;

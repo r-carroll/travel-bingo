@@ -19,10 +19,6 @@
       "bundleIdentifier": "com.carrollmedia.travelbingo"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
       "package": "com.carrollmedia.travelbingo"
     },
     "web": {
