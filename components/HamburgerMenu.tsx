@@ -1,10 +1,8 @@
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import React, { useContext, useRef, useState } from 'react';
-import { View, TouchableOpacity, Text, Animated, StyleSheet, useWindowDimensions } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Animated, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { useClickOutside } from 'react-native-click-outside';
 import { SoundContext } from '../shared/contexts';
-import { Linking } from 'react-native';
 
 
 const HamburgerMenu = ({resetBoard}) => {
@@ -57,9 +55,6 @@ const HamburgerMenu = ({resetBoard}) => {
                 {isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound On </Text><MaterialIcons name="volume-up" size={24} color="black" /></>}
                 {!isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound Off </Text><MaterialIcons name="volume-off" size={24} color="black" /></>}
               </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => Linking.openURL('https://www.buymeacoffee.com/carrollmedia')} style={styles.hamburgerItem}>
-              <Text>Buy me a coffee</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>

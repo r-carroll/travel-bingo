@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useDeferredValue } from 'react';
-import { View, StyleSheet, useWindowDimensions, Animated, Platform, TouchableOpacity } from 'react-native';
-import { Dimensions } from 'react-native';
-import { Canvas, LinearGradient, Rect, vec, Text, useFont, useAnimatedImageValue, Image, Skia, Group, TextPath, useImage } from '@shopify/react-native-skia';
-import { useSharedValue, useDerivedValue, withTiming, Easing, useAnimatedStyle, withSpring } from 'react-native-reanimated';
-import { useFonts } from 'expo-font';
+import { Canvas, Image, LinearGradient, Rect, Text, useAnimatedImageValue, useFont, useImage, vec } from '@shopify/react-native-skia';
+import React, { useEffect, useRef } from 'react';
+import { Animated, StyleSheet, useWindowDimensions } from 'react-native';
+import { Easing, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
+import { TapTitle } from './TapTitle';
 
 const getRandomColor = () => {
   const hexValues = [
@@ -21,9 +20,9 @@ const getRandomColor = () => {
 };
 
 
-const LandingScreen = () => {
+const LandingScreen = ({navigation}) => {
   const textAnimation = useRef(new Animated.Value(0)).current;
-  const font = useFont(require("../assets/VastShadow-Regular.ttf"), 40);
+  const font = useFont(require("../assets/ProtestRiot-Regular.ttf"), 40);
   const { width, height } = useWindowDimensions();
   const leftColor = useSharedValue('blue');
   const rightColor = useSharedValue('green');
@@ -35,7 +34,8 @@ const LandingScreen = () => {
     require("../assets/giphy.gif")
   );
 
-  const cmLogo = useImage(require("../assets/CM-logo.gif"))
+  const cmLogo = useImage(require("../assets/CM-logo.gif"));
+  const carAnimation = useAnimatedImageValue(require("../assets/car.gif"));
 
   if (animation == null) return null;
 
@@ -84,28 +84,28 @@ const LandingScreen = () => {
       rightColor.value = withTiming(getRandomColor(), { easing: Easing.linear, duration: 1000});
     }, 750);
   
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
     <>
-    <View style={{opacity: 0}}>
-      <Canvas style={styles.canvas} mode='continuous'>
+      <Canvas style={styles.canvas} mode='continuous' onTouch={() => navigation.navigate('SelectBoard')}>
         <Rect x={0} y={0} width={width} height={height} >
         <LinearGradient colors={colors} start={vec(0,0 )} end={vec(width, height )}/>
         </Rect>
-        <Text font={font} x={20} y={80} text={'Travel Bingo'}></Text>
-          {/* <Image
-            image={gif}
+        <Text font={font} x={width / 3} y={80} text={'Travel'}></Text>
+        <Text font={font} x={(width / 3) + 50} y={120} text={'Bingo'}></Text>
+          <Image
+            image={carAnimation}
             fit={'contain'}
-            x={100}
+            x={(width / 4)}
             y={100}
-            width={320}
-            height={180}
-          /> */}
+            width={width / 2}
+            height={height / 3}
+          />
+          <TapTitle width={width} height={height}/>
           <Image image={cmLogo} fit={'scaleDown'} x={(width - 220) / 2} y={(height - 220) - 50} width={220} height={80} />
       </Canvas>
-      </View>
     </>
   );
 };
