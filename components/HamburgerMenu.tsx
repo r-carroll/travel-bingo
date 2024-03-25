@@ -9,7 +9,8 @@ const HamburgerMenu = ({resetBoard}) => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const [ref, setRef] = useState({});
   const screenHeight = useWindowDimensions().height;
-  const menuPosition = useRef(new Animated.Value(200)).current;
+  const screenWidth = useWindowDimensions().width;
+  const menuPosition = useRef(new Animated.Value(screenWidth + 100)).current;
   const { toggleSound, isSoundEnabled } = useContext(SoundContext);
 
   const initialRef = useClickOutside<View>(() => {
@@ -19,7 +20,7 @@ const HamburgerMenu = ({resetBoard}) => {
   });
 
   const toggleMenu = () => {
-    const newPosition = isMenuVisible ? 200 : 0;
+    const newPosition = isMenuVisible ? screenWidth + 100 : 0;
     Animated.timing(menuPosition, {
       toValue: newPosition,
       duration: 200, // Adjust the duration as needed

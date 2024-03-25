@@ -1,16 +1,26 @@
-import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { LogBox } from 'react-native';
-import SelectBoard from './components/SelectBoard';
 import '@expo/metro-runtime';
-import PlayBoard from './components/PlayBoard';
-import mobileAds, { MaxAdContentRating, AppOpenAd, BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
 import { ClickOutsideProvider } from 'react-native-click-outside';
-import { createContext, useState, useEffect } from 'react';
+import mobileAds, { BannerAd, BannerAdSize, MaxAdContentRating, TestIds } from 'react-native-google-mobile-ads';
+import PlayBoard from './components/PlayBoard';
+import SelectBoard from './components/SelectBoard';
+import TitleScreen from './components/TitleScreen';
 import { SoundContext } from './shared/contexts';
 import { getData, storeData } from './shared/utils';
-import TitleScreen from './components/TitleScreen';
+
+let adUnitId = '';
+
+if (__DEV__) {
+  adUnitId = TestIds.BANNER;
+} else if (Platform.OS === 'ios') {
+  adUnitId = 'ca-app-pub-0399277712358740/1296362654';
+} else {
+  adUnitId = 'ca-app-pub-0399277712358740/3431571401'
+}
 
 
 mobileAds()
@@ -81,7 +91,7 @@ export default function App() {
         />
         </Stack.Navigator>
       </NavigationContainer>
-      <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+      <BannerAd unitId={adUnitId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
       </React.Suspense>
      </SoundContext.Provider>
     </ClickOutsideProvider>

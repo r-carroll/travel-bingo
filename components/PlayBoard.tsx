@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Modal } from 'react-native';
-import { Overlay, Icon } from '@rneui/themed';
+import { FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { Overlay } from '@rneui/themed';
+import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from "lottie-react-native";
-import { MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'; 
-import { convertTo2DArray, shuffleArray, storeData, getData, removeData } from '../shared/utils';
-import {LinearGradient} from 'expo-linear-gradient';
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { convertTo2DArray, getData, removeData, shuffleArray, storeData } from '../shared/utils';
 
-import { Dimensions } from 'react-native';
-import _ from 'lodash';
-import { boards } from '../data/boards';
-import { RFPercentage } from "react-native-responsive-fontsize";
-import HeroComponent from './Hero';
 import { Audio } from 'expo-av';
-import HamburgerMenu from './HamburgerMenu';
+import _ from 'lodash';
+import { Dimensions } from 'react-native';
+import { RFPercentage } from "react-native-responsive-fontsize";
+import { boards } from '../data/boards';
 import { SoundContext } from '../shared/contexts';
+import HamburgerMenu from './HamburgerMenu';
+import HeroComponent from './Hero';
 
 const { width } = Dimensions.get('window');
 const squareWidth = Math.floor((width - 10 * 5) / 5); 
@@ -43,6 +43,7 @@ const PlayBoard = ({navigation, route }) => {
     shuffledBoard.squares[2][2].label = 'Free'
     shuffledBoard.squares[2][2].iconName = 'check-circle'
     shuffledBoard.squares[2][2].iconType = 'FA5'
+    shuffledBoard.squares[2][2].isSelected = true;
 
     return shuffledBoard;
   }
