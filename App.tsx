@@ -1,6 +1,7 @@
 import '@expo/metro-runtime';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
@@ -22,23 +23,6 @@ if (__DEV__) {
   adUnitId = 'ca-app-pub-0399277712358740/3431571401'
 }
 
-
-mobileAds()
-  .setRequestConfiguration({
-    maxAdContentRating: MaxAdContentRating.G,
-    tagForChildDirectedTreatment: true,
-    tagForUnderAgeOfConsent: true,
-    // An array of test device IDs to allow.
-    testDeviceIdentifiers: ['EMULATOR'],
-  })
-  .then(() => {
-    mobileAds()
-      .initialize()
-      .then(adapterStatuses => {
-        // Initialization complete!
-      });
-  });
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -47,6 +31,31 @@ export default function App() {
   const toggleSound = () => {
     setIsSoundEnabled(!isSoundEnabled);
   };
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === 'granted') {
+        console.log('Yay! I have user permission to track data');
+      }
+      mobileAds()
+    .setRequestConfiguration({
+      maxAdContentRating: MaxAdContentRating.G,
+      tagForChildDirectedTreatment: true,
+      tagForUnderAgeOfConsent: true,
+      // An array of test device IDs to allow.
+      testDeviceIdentifiers: ['EMULATOR'],
+    })
+    .then(() => {
+      mobileAds()
+        .initialize()
+        .then(adapterStatuses => {
+          // Initialization complete!
+        });
+    });
+  
+    })();
+  }, []);
 
   useEffect(() => {
     getData('soundEnabled').then(data => {
