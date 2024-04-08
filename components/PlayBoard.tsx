@@ -89,6 +89,7 @@ const PlayBoard = ({navigation, route }) => {
   function triggerBingo() {
     playVictorySound();
     setIsBingo(true);
+    removeData(board.id.toString());
   }
 
   async function playSound() {
@@ -130,6 +131,7 @@ const PlayBoard = ({navigation, route }) => {
   const resetBoard = () => {
     setIsBingo(false);
     setBoard(prepareBoard);
+    setIsGameOver(false);
     removeData(board.id.toString());
   }
 

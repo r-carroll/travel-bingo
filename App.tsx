@@ -76,6 +76,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="TitleScreen"
         screenOptions={{
           headerTintColor: 'white',
+          headerTitleStyle: { color: 'white'},
           headerStyle: { backgroundColor: 'black' },
           title: '',
           headerShown: true

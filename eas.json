@@ -17,6 +17,9 @@
       "channel": "preview",
       "ios": {
         "image": "latest"
+      },
+      "android": {
+        "buildType": "apk"
       }
     },
     "production": {

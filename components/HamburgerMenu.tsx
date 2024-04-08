@@ -53,8 +53,8 @@ const HamburgerMenu = ({resetBoard}) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={toggleSound} style={styles.hamburgerItem}>
               <View style={{flexDirection: 'row', alignItems: 'center', display: 'flex'}}>
-                {isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound On </Text><MaterialIcons name="volume-up" size={24} color="black" /></>}
-                {!isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound Off </Text><MaterialIcons name="volume-off" size={24} color="black" /></>}
+                {!isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound On </Text><MaterialIcons name="volume-up" size={24} color="black" /></>}
+                {isSoundEnabled && <><Text style={{ lineHeight: 30 }}>Sound Off </Text><MaterialIcons name="volume-off" size={24} color="black" /></>}
               </View>
             </TouchableOpacity>
           </View>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Travel Bingo",
     "slug": "travelBingo",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -39,7 +39,12 @@
       }
     },
     "android": {
-      "package": "com.carrollmedia.travelbingo"
+      "package": "com.carrollmedia.travelbingo",
+      "versionCode": 2
+    },
+    "androidStatusBar": {
+      "translucent": false,
+      "barStyle": "dark-content"
     },
     "web": {
       "favicon": "./assets/favicon.png"
