@@ -3,10 +3,11 @@ import { Overlay } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from "lottie-react-native";
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppState, Button, FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { convertTo2DArray, getData, removeData, shuffleArray, storeData } from '../shared/utils';
 
 import { Audio } from 'expo-av';
+import * as Haptics from 'expo-haptics';
 import _ from 'lodash';
 import { Dimensions } from 'react-native';
 import { RFPercentage } from "react-native-responsive-fontsize";
@@ -64,30 +65,57 @@ const PlayBoard = ({navigation, route }) => {
     })
   }, [])
 
-  useEffect(() => {
+  AppState.addEventListener('change', async (newState) => {
+    if (newState !== 'active') {
+      storeData(board.id.toString(), board);
+    }
+  })
+
+  const columnBingo = () => {
     for (const row of board.squares) {
       if (row.every(square => square.isSelected)) {
-        triggerBingo();
+        return true;
       }
-    }
-  
-    for (let col = 0; col < board.squares[0].length; col++) {
-      if (board.squares.every(row => row[col].isSelected)) {
-        triggerBingo();
-      }
-    }
-  
-    if (board.squares.every((row, i) => row[i].isSelected)) {
-      triggerBingo();
-    }
-    if (board.squares.every((row, i) => row[board.squares.length - 1 - i].isSelected)) {
-      triggerBingo();
     }
 
-  }, [board]);
+    return false;
+  }
+
+  const rowBingo = () => {
+    for (let col = 0; col < board.squares[0].length; col++) {
+      if (board.squares.every(row => row[col].isSelected)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  const diagBingo = () => {
+    if (board.squares.every((row, i) => row[i].isSelected)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  const diagBingoOther = () => {
+    if (board.squares.every((row, i) => row[board.squares.length - 1 - i].isSelected)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  if (!isBingo) {
+    if (columnBingo() || rowBingo() || diagBingo() || diagBingoOther()) {
+      triggerBingo();
+    }
+  }
 
   function triggerBingo() {
     playVictorySound();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setIsBingo(true);
     removeData(board.id.toString());
   }
@@ -101,7 +129,7 @@ const PlayBoard = ({navigation, route }) => {
   }
   
   async function playVictorySound() {
-    if (isSoundEnabled) {
+    if (isSoundEnabled && !isGameOver) {
       const { sound } = await Audio.Sound.createAsync( require('../assets/victory.mp3')
       );
       await sound.playAsync();
@@ -110,6 +138,9 @@ const PlayBoard = ({navigation, route }) => {
 
   const handleSquareSelection = (square) => {
     playSound();
+    Haptics.notificationAsync(
+      Haptics.NotificationFeedbackType.Success
+    );
     let updatedBoard = _.cloneDeep(board)
     updatedBoard.squares.forEach(column => {
       column.forEach(currentSquare => {
@@ -120,7 +151,6 @@ const PlayBoard = ({navigation, route }) => {
     })
 
     setBoard(updatedBoard);
-    storeData(board.id.toString(), updatedBoard);
   };
 
   const toggleBingo = () => {
