@@ -8,6 +8,7 @@ import { convertTo2DArray, getData, removeData, shuffleArray, storeData } from '
 
 import { Audio } from 'expo-av';
 import * as Haptics from 'expo-haptics';
+import { useKeepAwake } from 'expo-keep-awake';
 import _ from 'lodash';
 import { Dimensions } from 'react-native';
 import { RFPercentage } from "react-native-responsive-fontsize";
@@ -56,6 +57,8 @@ const PlayBoard = ({navigation, route }) => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const { isSoundEnabled } = useContext(SoundContext);
+
+  useKeepAwake();
 
   useEffect(() => {
     getData(board.id.toString()).then(data => {

@@ -43,7 +43,8 @@
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
     "expo-tracking-transparency": "~3.1.0",
-    "expo-haptics": "~12.4.0"
+    "expo-haptics": "~12.4.0",
+    "expo-keep-awake": "~12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
