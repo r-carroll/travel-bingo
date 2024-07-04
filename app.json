@@ -2,7 +2,7 @@
   "expo": {
     "name": "Travel Bingo",
     "slug": "travelBingo",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,26 +21,35 @@
         "NSPrivacyAccessedAPITypes": [
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
-            "NSPrivacyAccessedAPITypeReasons": ["8FFB.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "8FFB.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace",
-            "NSPrivacyAccessedAPITypeReasons": ["85F4.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "85F4.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
-            "NSPrivacyAccessedAPITypeReasons": ["C617.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "C617.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-            "NSPrivacyAccessedAPITypeReasons": ["CA92.1", "1C8F.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1",
+              "1C8F.1"
+            ]
           }
         ]
       }
     },
     "android": {
       "package": "com.carrollmedia.travelbingo",
-      "versionCode": 3
+      "versionCode": 4
     },
     "androidStatusBar": {
       "translucent": false,
@@ -64,7 +73,8 @@
           }
         }
       ],
-      "expo-tracking-transparency"
+      "expo-tracking-transparency",
+      "expo-font"
     ],
     "extra": {
       "eas": {

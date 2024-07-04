@@ -449,8 +449,8 @@ export const boards = [
         },
         {
           "label": "Propane",
-          "iconType": "MCI",
-          "iconName": "propane-tank-outline",
+          "iconType": "MI",
+          "iconName": "propane",
           "landmarkId": 42
         },
         {
