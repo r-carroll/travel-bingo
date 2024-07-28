@@ -167,6 +167,30 @@ export const boards = [
           "iconType": "FA5",
           "iconName": "record-vinyl",
           "landmarkId": 27
+        },
+        {
+          "label": "Self-storage",
+          "iconType": "FA5",
+          "iconName": "box-open",
+          "landmarkId": 28
+        },
+        {
+          "label": "Plane",
+          "iconType": "FA5",
+          "iconName": "plane",
+          "landmarkId": 29
+        },
+        {
+          "label": "Fence",
+          "iconType": "MCI",
+          "iconName": "fence",
+          "landmarkId": 30
+        },
+        {
+          "label": "Hotel",
+          "iconType": "FA5",
+          "iconName": "hotel",
+          "landmarkId": 31
         }
       ]
     },
@@ -381,6 +405,60 @@ export const boards = [
           "iconName": "silo",
           "landmarkId": 34
         },
+        {
+          "label": "Flag",
+          "iconType": "FA5",
+          "iconName": "flag-usa",
+          "landmarkId": 35
+        },
+        {
+          "label": "Boat",
+          "iconType": "MCI",
+          "iconName": "sail-boat",
+          "landmarkId": 36
+        },
+        {
+          "label": "Plane",
+          "iconType": "FA5",
+          "iconName": "plane",
+          "landmarkId": 37
+        },
+        {
+          "label": "Bridge",
+          "iconType": "MCI",
+          "iconName": "bridge",
+          "landmarkId": 38
+        },
+        {
+          "label": "Fence",
+          "iconType": "MCI",
+          "iconName": "fence",
+          "landmarkId": 39
+        },
+        {
+          "label": "Picnic Table",
+          "iconType": "MCI",
+          "iconName": "table-picnic",
+          "landmarkId": 40
+        },
+        {
+          "label": "Inn",
+          "iconType": "FA",
+          "iconName": "hotel",
+          "landmarkId": 41
+        },
+        {
+          "label": "Propane",
+          "iconType": "MI",
+          "iconName": "propane",
+          "landmarkId": 42
+        },
+        {
+          "label": "Bird Feeder",
+          "iconType": "MCI",
+          "iconName": "bird",
+          "landmarkId": 43
+        }
       ]
     },
     {
@@ -540,6 +618,30 @@ export const boards = [
           "iconType": "FA5",
           "iconName": "moon",
         },
+        {
+          "label": "Flag",
+          "iconType": "FA5",
+          "iconName": "flag-usa",
+          "landmarkId": 26
+        },
+        {
+          "label": "Fence",
+          "iconType": "MCI",
+          "iconName": "fence",
+          "landmarkId": 27
+        },
+        {
+          "label": "Picnic Table",
+          "iconType": "MCI",
+          "iconName": "table-picnic",
+          "landmarkId": 28
+        },
+        {
+          "label": "Bird Feeder",
+          "iconType": "MCI",
+          "iconName": "bird",
+          "landmarkId": 29
+        }
       ]
     },
     {
@@ -698,6 +800,12 @@ export const boards = [
           "landmarkId": 25,
           "iconType": "MCI",
           "iconName": "bus-school",
+        },
+        {
+          "label": "Plane",
+          "iconType": "FA5",
+          "iconName": "plane",
+          "landmarkId": 26
         }
       ]
     }
