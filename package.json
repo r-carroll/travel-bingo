@@ -1,6 +1,6 @@
 {
   "name": "travel-bingo",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -36,7 +36,7 @@
     "react-native": "0.74.2",
     "react-native-click-outside": "^0.1.1",
     "react-native-gesture-handler": "~2.16.1",
-    "react-native-google-mobile-ads": "^12.7.1",
+    "react-native-google-mobile-ads": "^14.0.1",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-reanimated": "~3.10.1",
     "react-native-responsive-fontsize": "^0.5.1",
